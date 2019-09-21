@@ -165,6 +165,7 @@
 					<div class="dropdown-menu dropdown-menu-left dropdown-content wmin-md-350">
 						<div class="dropdown-content-body p-1">
 							<div class="row no-gutters">
+
 								<?php
 									if(($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
 								?>
@@ -182,21 +183,26 @@
 										</a>
 									</div>
 								<?php 
-									}else{} 
+									}else{
 								?>
-
-								<div class="col-12 col-sm-4">
-									<a href="<?php echo site_url('Nilai'); ?>" class="d-block text-default text-center ripple-dark rounded p-3">
-										<i class="icon-book3 icon-2x"></i>
-										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Nilai Siswa</div>
-									</a>
-								</div>
+									<div class="col-12 col-sm-4">
+										<a href="<?php echo site_url('Nilai'); ?>" class="d-block text-default text-center ripple-dark rounded p-3">
+											<i class="icon-book3 icon-2x"></i>
+											<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Nilai Siswa</div>
+										</a>
+									</div>
+								<?php
+									} 
+								?>
 
 							</div>
 						</div>
 					</div>
 				</li>
-
+				
+				<?php
+					if(($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
+				?>
 				<li class="nav-item nav-item-levels mega-menu-full">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-book2 mr-3"></i>
@@ -277,7 +283,7 @@
 						</div>
 					</div>
 				</li>
-
+				<?php }else{} ?>
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-graduation mr-2"></i>
