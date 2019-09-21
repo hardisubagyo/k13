@@ -78,7 +78,8 @@
 								</table>
 							</div>
 							<hr>
-							<input type="hidden" name="id_tingkat" value="<?php echo $this->input->get('id_tingkat'); ?>">
+							<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
+							<input type="hidden" name="id_tingkat" value="<?php echo $tingkat; ?>">
 							<input type="hidden" name="id_tahunajaran" value="<?php echo $this->input->get('id_tahunajaran'); ?>">
 							<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
 						</div>

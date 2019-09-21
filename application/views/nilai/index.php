@@ -11,6 +11,22 @@
 	</div>
 </div>
 <!-- /page header -->
+
+<script type="text/javascript">
+    var htmlobjek;
+    $(document).ready(function(){
+        $("#id_matpel").change(function(){
+            var id_matpel = $("#id_matpel").val();
+            $.ajax({
+              url: '<?php echo site_url('Nilai/get_kelas').'/';?>'+id_matpel,
+              data: 'id_matpel='+id_matpel,
+              success: function(msg){
+                  $("#id_kelas").html(msg);
+              }
+            });
+        });
+    });
+</script>
 	
 
 <div class="content">
@@ -45,7 +61,8 @@
 						
 						<div class="form-group">
 							<label>Mata Pelajaran</label>
-							<select class="form-control" name="id_matpel">
+							<select class="form-control" name="id_matpel" id="id_matpel">
+							<option value="Pilih Mata Pelajaran">--Pilih Mata Pelajaran--</option>
 								<?php foreach($matpel as $item) { ?>
 									<option value="<?php echo $item->id_matpel; ?>"><?php echo $item->nama_matpel; ?></option>
 								<?php } ?>
@@ -53,11 +70,9 @@
 						</div>
 
 						<div class="form-group">
-							<label>Tingkat</label>
-							<select class="form-control" name="id_tingkat">
-								<?php foreach($tingkat as $item) { ?>
-									<option value="<?php echo $item->id_tingkat; ?>"><?php echo $item->tingkat; ?></option>
-								<?php } ?>
+							<label>Kelas</label>
+							<select class="form-control" name="id_kelas" id="id_kelas">
+								<option value="Pilih Kelas">--Pilih Kelas--</option>
 							</select>
 						</div>
 

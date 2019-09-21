@@ -54,12 +54,12 @@
 										<th>PB</th>
 									</tr>
 									<?php 
-										$id_tingkat = $this->input->get('id_tingkat');
+										$id_kelas = $this->input->get('id_kelas');
 										$id_tahunajaran = $this->input->get('id_tahunajaran');
 										$semester = $this->input->get('semester');
 
 										foreach($siswa as $item){ 
-										$getnilai = $this->db->query("SELECT * FROM tr_nilai_spirit WHERE NISN = '$item->NISN' AND id_tingkat = '$id_tingkat' AND id_tahunajaran = '$id_tahunajaran' AND semester = '$semester' ")->row();
+										$getnilai = $this->db->query("SELECT * FROM tr_nilai_spirit WHERE NISN = '$item->NISN' AND id_kelas = '$id_kelas' AND id_tahunajaran = '$id_tahunajaran' AND semester = '$semester' ")->row();
 										$ibadah = explode("|", $getnilai->beribadah);
 										$syukur = explode("|", $getnilai->syukur);
 										$doa = explode("|", $getnilai->berdoa);
@@ -93,7 +93,7 @@
 											<input type="number" max="1" min="1" class="form-control" name="<?php echo 'toleransiPB-'.$item->NISN; ?>" value="<?php echo $toleransi[1]; ?>" readonly>
 										</td>
 										<td>
-											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $item->NISN; ?>" data-ta="<?php echo $id_tahunajaran; ?>" data-semester="<?php echo $semester; ?>" data-idtingkat="<?php echo $id_tingkat; ?>" data-backdrop="static" data-keyboard="false">
+											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $item->NISN; ?>" data-ta="<?php echo $id_tahunajaran; ?>" data-semester="<?php echo $semester; ?>" data-idkelas="<?php echo $id_kelas; ?>" data-backdrop="static" data-keyboard="false">
 											<i class="icon-pencil3"></i>
 										</button>
 										</td>
@@ -102,7 +102,7 @@
 								</table>
 							</div>
 							<hr>
-							<input type="hidden" name="id_tingkat" value="<?php echo $this->input->get('id_tingkat'); ?>">
+							<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
 							<input type="hidden" name="id_tahunajaran" value="<?php echo $this->input->get('id_tahunajaran'); ?>">
 							<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
 						</div>
@@ -145,7 +145,7 @@
   		var nisn = $(this).data('nisn');
 	    var semester = $(this).data('semester');
 	    var ta = $(this).data('ta');
-	    var idtingkat = $(this).data('idtingkat');
+	    var idkelas = $(this).data('idkelas');
 	    
 	    $.ajax({
 			type : "post",
@@ -153,7 +153,7 @@
 		        "nisn" : nisn,
 				"ta" : ta,
 				"semester" : semester,
-				"idtingkat" : idtingkat
+				"idkelas" : idkelas
 		    },
 		    url: "<?php echo site_url('Spiritual/Edit'); ?>",
 		    dataType: "json",

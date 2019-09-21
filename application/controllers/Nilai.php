@@ -8,7 +8,14 @@ class Nilai extends CI_Controller {
 		$data['title'] = 'Master Nilai';
 		$data['header'] = 'Nilai';
 
-		$data['matpel'] = $this->M_model->read('tm_matpel', null, 'nama_matpel ASC')->result();
+		$id_matpel = str_replace(array('[',']'),'',json_encode($this->session->userdata('id_matpel')));
+		if($this->session->userdata('id_akses') == '2' || ($this->session->userdata('id_akses') == '1')){
+			$data['matpel'] = $this->db->query("SELECT * FROM tm_matpel WHERE id_matpel IN ($id_matpel) ORDER BY nama_matpel ASC")->result();
+		}else{
+			$data['matpel'] = $this->db->query("SELECT * FROM tm_matpel ORDER BY nama_matpel ASC")->result();
+		}
+
+		//$data['matpel'] = $this->M_model->read('tm_matpel', null, 'nama_matpel ASC')->result();
 		$data['tahunajaran'] = $this->M_model->read('tm_tahunajaran')->result();
 		$data['tingkat'] = $this->M_model->read('tm_tingkat', null, 'tingkat ASC')->result();
 		$data['kd'] = $this->M_model->read('tm_jenis_kd')->result();
@@ -20,10 +27,15 @@ class Nilai extends CI_Controller {
 
 	public function View(){
 		$id_matpel = $this->input->get('id_matpel');
-		$id_tingkat = $this->input->get('id_tingkat');
+		
 		$id_tahunajaran = $this->input->get('id_tahunajaran');
 		$semester = $this->input->get('semester');
 		$id_jenis_kd = $this->input->get('id_jenis_kd');
+		$id_kelas = $this->input->get('id_kelas');
+
+		$gettingkat = $this->db->query("SELECT * FROM tm_kelas WHERE id_kelas = '$id_kelas'")->row();
+
+		$id_tingkat = $gettingkat->id_tingkat;
 
 		$data['title'] = 'Master Nilai';
 		$data['header'] = 'Nilai';
@@ -31,6 +43,7 @@ class Nilai extends CI_Controller {
 		$data['matpel'] = $this->M_model->read('tm_matpel', array('id_matpel' => $id_matpel))->row();
 		$data['kd'] = $this->M_model->read('tm_kd',array('id_matpel' => $id_matpel, 'id_tingkat' => $id_tingkat,'semester' => $semester, 'id_jenis_kd' => $id_jenis_kd))->result();
 		$data['tingkat'] = $this->M_model->read('tm_tingkat', array('id_tingkat' => $id_tingkat))->row();
+		$data['kelas'] = $this->M_model->read('tm_kelas', array('id_kelas' => $id_kelas))->row();
 		$data['ta'] = $this->M_model->read('tm_tahunajaran', array('id_tahunajaran' => $id_tahunajaran))->row();
 		$data['jenis_kd'] = $this->M_model->read('tm_jenis_kd', array('id_jenis_kd' => $id_jenis_kd))->row();
 
@@ -49,6 +62,7 @@ class Nilai extends CI_Controller {
 		$semester = $this->input->post('semester');
 		$idkd = $this->input->post('idkd');
 		$idtingkat = $this->input->post('idtingkat');
+		$idkelas = $this->input->post('idkelas');
 
 		$query = $this->db->query("
 			SELECT 
@@ -85,6 +99,7 @@ class Nilai extends CI_Controller {
 		$semester = $this->input->post('semester');
 		$idkd = $this->input->post('idkd');
 		$idtingkat = $this->input->post('idtingkat');
+		$idkelas = $this->input->post('idkelas');
 
 		$query = $this->db->query("
 			SELECT 
@@ -101,6 +116,21 @@ class Nilai extends CI_Controller {
 			$this->M_model->update('tr_nilai_matpel',array('nilai' => $this->input->post("nilai".$item->id_nilai)), array('id_nilai' => $this->input->post("id_nilai".$item->id_nilai)));
 		}
 
-		redirect(site_url('Nilai/View?id_jenis_kd='.$idjeniskd.'&id_matpel='.$idmatpel.'&id_tingkat='.$idtingkat.'&id_tahunajaran='.$ta.'&semester='.$semester.''));
-	}	
+		redirect(site_url('Nilai/View?id_jenis_kd='.$idjeniskd.'&id_matpel='.$idmatpel.'&id_kelas='.$idkelas.'&id_tahunajaran='.$ta.'&semester='.$semester.''));
+	}
+
+	public function get_kelas($id){
+		$getkelas = $this->db->query("SELECT * FROM tr_guru_matpel WHERE id_pegawai = ".$this->session->userdata('NIP')." AND id_matpel = ".$id."")->row();
+		$id_matpel = str_replace(array('[',']','"'),'',json_encode($getkelas->id_kelas));
+		$getmatpel = explode(",",$id_matpel);
+		$idmatpel = array();
+		foreach ($getmatpel as $item) {
+			$idmatpel[] = $item;
+		};
+		$getarrmatpel = str_replace(array('[',']'),'',json_encode($idmatpel));
+
+		$data['kelas'] = $this->db->query("SELECT * FROM tm_kelas WHERE id_kelas IN ($getarrmatpel) ORDER BY kelas ASC")->result();
+
+		$this->load->view('nilai/kelas', $data);
+	}
 }

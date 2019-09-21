@@ -38,10 +38,10 @@
 					<div class="card-body">
 						
 						<div class="form-group">
-							<label>Tingkat</label>
-							<select class="form-control" name="id_tingkat">
-								<?php foreach($tingkat as $item) { ?>
-									<option value="<?php echo $item->id_tingkat; ?>"><?php echo $item->tingkat; ?></option>
+							<label>Kelas</label>
+							<select class="form-control" name="id_kelas">
+								<?php foreach($kelas as $item) { ?>
+									<option value="<?php echo $item->id_kelas; ?>"><?php echo $item->kelas; ?></option>
 								<?php } ?>
 							</select>
 						</div>
@@ -94,10 +94,10 @@
 					<div class="card-body">
 						
 						<div class="form-group">
-							<label>Tingkat</label>
-							<select class="form-control" name="id_tingkat">
-								<?php foreach($tingkat as $item) { ?>
-									<option value="<?php echo $item->id_tingkat; ?>"><?php echo $item->tingkat; ?></option>
+							<label>Kelas</label>
+							<select class="form-control" name="id_kelas">
+								<?php foreach($kelas as $item) { ?>
+									<option value="<?php echo $item->id_kelas; ?>"><?php echo $item->kelas; ?></option>
 								<?php } ?>
 							</select>
 						</div>

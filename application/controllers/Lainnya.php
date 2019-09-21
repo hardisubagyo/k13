@@ -11,6 +11,7 @@ class Lainnya extends CI_Controller {
 
 		$data['tahunajaran'] = $this->M_model->read('tm_tahunajaran')->result();
 		$data['tingkat'] = $this->M_model->read('tm_tingkat', null, 'tingkat ASC')->result();
+		$data['kelas'] = $this->M_model->read('tm_kelas', array('id_kelas' => $this->session->userdata('walikelas')))->result();
 
 		$this->load->view('header', $data);
 		$this->load->view('lainnya/index', $data);
@@ -19,12 +20,16 @@ class Lainnya extends CI_Controller {
 	}
 
 	public function form(){
-		$tingkat = $this->input->get('id_tingkat');
+		$idkelas = $this->input->get("id_kelas");
+		$gettingkat = $this->M_model->read("tm_kelas",array("id_kelas" => $this->input->get("id_kelas")))->row();
+		
+		$tingkat = $gettingkat->id_tingkat;
+
 		$ta = $this->input->get('id_tahunajaran');
 		$semester = $this->input->get('semester');
 
-		$data['title'] = 'Input Nilai Sosial';
-		$data['header'] = 'Form Nilai Sosial';
+		$data['title'] = 'Input Nilai Lainnya';
+		$data['header'] = 'Form Nilai Lainnya';
 		$data['ekstra'] = $this->M_model->read('tm_ekstra')->result();
 
 		$data['siswa'] = $this->db->query("
@@ -36,6 +41,7 @@ class Lainnya extends CI_Controller {
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
 			WHERE tm_tingkat.id_tingkat = '$tingkat'
+			AND tm_siswa.id_kelas = '$idkelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
 
@@ -45,7 +51,10 @@ class Lainnya extends CI_Controller {
 	}
 
 	public function simpan(){
-		$id_tingkat = $this->input->post('id_tingkat');
+		$idkelas = $this->input->post("id_kelas");
+		$gettingkat = $this->M_model->read("tm_kelas",array("id_kelas" => $idkelas))->row();
+
+		$tingkat = $gettingkat->id_tingkat;
 		$id_tahunajaran = $this->input->post('id_tahunajaran');
 		$semester = $this->input->post('semester');
 
@@ -57,7 +66,8 @@ class Lainnya extends CI_Controller {
 			FROM tm_siswa
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
-			WHERE tm_tingkat.id_tingkat = '$id_tingkat'
+			WHERE tm_tingkat.id_tingkat = '$tingkat'
+			AND tm_siswa.id_kelas = '$idkelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
 
@@ -83,26 +93,26 @@ class Lainnya extends CI_Controller {
 			
 			$this->db->query("
 				INSERT INTO 
-					tr_absen(NISN,sakit,ijin,alpa,saran,id_tingkat,id_tahunajaran,semester) 
-				VALUES('".$item->NISN."','".$sakit."','".$ijin."','".$alpa."','".$saran."','".$id_tingkat."','".$id_tahunajaran."','".$semester."')
+					tr_absen(NISN,sakit,ijin,alpa,saran,id_kelas,id_tahunajaran,semester) 
+				VALUES('".$item->NISN."','".$sakit."','".$ijin."','".$alpa."','".$saran."','".$idkelas."','".$id_tahunajaran."','".$semester."')
 			");
 
 			$this->db->query("
 				INSERT INTO 
-					tr_ekstra(NISN,id_tm_ekstra_1,nilai,id_tm_ekstra_2,nilai_2,id_tm_ekstra_3,nilai_3,id_tingkat,id_tahunajaran,semester) 
-				VALUES('".$item->NISN."','".$id_tm_ekstra_1."','".$nilai."','".$id_tm_ekstra_2."','".$nilai_2."','".$id_tm_ekstra_3."','".$nilai_3."','".$id_tingkat."','".$id_tahunajaran."','".$semester."')
+					tr_ekstra(NISN,id_tm_ekstra_1,nilai,id_tm_ekstra_2,nilai_2,id_tm_ekstra_3,nilai_3,id_kelas,id_tahunajaran,semester) 
+				VALUES('".$item->NISN."','".$id_tm_ekstra_1."','".$nilai."','".$id_tm_ekstra_2."','".$nilai_2."','".$id_tm_ekstra_3."','".$nilai_3."','".$idkelas."','".$id_tahunajaran."','".$semester."')
 			");
 
 			$this->db->query("
 				INSERT INTO 
-					tr_fisik(NISN,tinggi_1,berat_1,tinggi_2,berat_2,pendengaran,penglihatan,gigi,id_tingkat,id_tahunajaran,semester) 
-				VALUES('".$item->NISN."','".$tinggi_1."','".$berat_1."','".$tinggi_2."','".$berat_2."','".$pendengaran."','".$penglihatan."','".$gigi."','".$id_tingkat."','".$id_tahunajaran."','".$semester."')
+					tr_fisik(NISN,tinggi_1,berat_1,tinggi_2,berat_2,pendengaran,penglihatan,gigi,id_kelas,id_tahunajaran,semester) 
+				VALUES('".$item->NISN."','".$tinggi_1."','".$berat_1."','".$tinggi_2."','".$berat_2."','".$pendengaran."','".$penglihatan."','".$gigi."','".$idkelas."','".$id_tahunajaran."','".$semester."')
 			");
 
 			$this->db->query("
 				INSERT INTO 
-					tr_prestasi(NISN,prestasi,id_tingkat,id_tahunajaran,semester) 
-				VALUES('".$item->NISN."','".$prestasi."','".$id_tingkat."','".$id_tahunajaran."','".$semester."')
+					tr_prestasi(NISN,prestasi,id_kelas,id_tahunajaran,semester) 
+				VALUES('".$item->NISN."','".$prestasi."','".$idkelas."','".$id_tahunajaran."','".$semester."')
 			");
 		}
 
@@ -111,12 +121,12 @@ class Lainnya extends CI_Controller {
 	}
 
 	public function view(){
-		$tingkat = $this->input->get('id_tingkat');
+		$idkelas = $this->input->get('id_kelas');
 		$ta = $this->input->get('id_tahunajaran');
 		$semester = $this->input->get('semester');
 
-		$data['title'] = 'Input Nilai Sosial';
-		$data['header'] = 'Form Nilai Sosial';
+		$data['title'] = 'Input Nilai Lainnya';
+		$data['header'] = 'Form Nilai Lainnya';
 		$data['ekstra'] = $this->M_model->read('tm_ekstra')->result();
 
 		$data['siswa'] = $this->db->query("
@@ -127,7 +137,7 @@ class Lainnya extends CI_Controller {
 			FROM tm_siswa
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
-			WHERE tm_tingkat.id_tingkat = '$tingkat'
+			WHERE tm_siswa.id_kelas = '$idkelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
 
@@ -138,21 +148,21 @@ class Lainnya extends CI_Controller {
 
 	public function Edit(){
 		$nisn = $this->input->post('nisn');
-		$idtingkat = $this->input->post('idtingkat');
+		$idkelas = $this->input->post('idkelas');
 		$idtahunajaran = $this->input->post('idtahunajaran');
 		$semester = $this->input->post('semester');
 
 		$absen = $this->db->query("
-			SELECT * FROM tr_absen WHERE NISN = '".$nisn."' AND id_tingkat = '".$idtingkat."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
+			SELECT * FROM tr_absen WHERE NISN = '".$nisn."' AND id_kelas = '".$idkelas."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
 
 		$fisik = $this->db->query("
-			SELECT * FROM tr_fisik WHERE NISN = '".$nisn."' AND id_tingkat = '".$idtingkat."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
+			SELECT * FROM tr_fisik WHERE NISN = '".$nisn."' AND id_kelas = '".$idkelas."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
 
 		$prestasi = $this->db->query("
-			SELECT * FROM tr_prestasi WHERE NISN = '".$nisn."' AND id_tingkat = '".$idtingkat."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
+			SELECT * FROM tr_prestasi WHERE NISN = '".$nisn."' AND id_kelas = '".$idkelas."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
 
 		$eks = $this->db->query("
-			SELECT * FROM tr_ekstra WHERE NISN = '".$nisn."' AND id_tingkat = '".$idtingkat."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
+			SELECT * FROM tr_ekstra WHERE NISN = '".$nisn."' AND id_kelas = '".$idkelas."' AND id_tahunajaran = '".$idtahunajaran."' AND semester = '".$semester."'")->row();
 		
 		if(($absen) && ($fisik) && ($prestasi) && ($eks)){
 			$output = array(
@@ -163,7 +173,7 @@ class Lainnya extends CI_Controller {
 				'prestasi' => json_encode($prestasi),
 				'eks' => json_encode($eks),
 				'semester' => $semester,
-				'id_tingkat' => $idtingkat,
+				'id_kelas' => $idkelas,
 				'id_tahunajaran' => $idtahunajaran,
 				'nisn' => $nisn
 			);
@@ -180,7 +190,7 @@ class Lainnya extends CI_Controller {
 
 	public function ubah(){
 		$nisn = $this->input->post('nisn');
-		$id_tingkat = $this->input->post('id_tingkat');
+		$id_kelas = $this->input->post('id_kelas');
 		$id_tahunajaran = $this->input->post('id_tahunajaran');
 		$semester = $this->input->post('semester');
 
@@ -214,7 +224,7 @@ class Lainnya extends CI_Controller {
 			"prestasi" => $this->input->post("prestasi")
 		);
 
-		$where = array('NISN' => $nisn, 'id_tingkat' => $id_tingkat, 'id_tahunajaran' => $id_tahunajaran, 'semester' => $semester);
+		$where = array('NISN' => $nisn, 'id_kelas' => $id_kelas, 'id_tahunajaran' => $id_tahunajaran, 'semester' => $semester);
 
 		$this->M_model->update('tr_absen',$absen, $where);
 		$this->M_model->update('tr_fisik',$fisik, $where);
@@ -222,7 +232,7 @@ class Lainnya extends CI_Controller {
 		$this->M_model->update('tr_ekstra',$ekstra, $where);
 
 		$this->session->set_flashdata('success', 'Berhasil diubah');
-		redirect(site_url('Lainnya/view?id_tingkat='.$id_tingkat.'&id_tahunajaran='.$id_tahunajaran.'&semester='.$semester));
+		redirect(site_url('Lainnya/view?id_kelas='.$id_kelas.'&id_tahunajaran='.$id_tahunajaran.'&semester='.$semester));
 	}
 
 }

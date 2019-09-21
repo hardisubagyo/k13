@@ -19,7 +19,7 @@
 
 			<div class="card">
 				<div class="card-header bg-success text-white header-elements-inline">
-					<h6 class="card-title"><?php echo $header .' Mata Pelajaran '. $matpel->nama_matpel . ' Kompetensi '. $jenis_kd->nama_jenis_kd .' Tingkat '. $tingkat->tingkat. ' Tahun Ajaran '. $ta->tahunajaran. ' Semester '. $this->input->get('semester') ; ?></h6>
+					<h6 class="card-title"><?php echo $header .' Mata Pelajaran '. $matpel->nama_matpel . ' Kompetensi '. $jenis_kd->nama_jenis_kd .' Kelas '. $kelas->kelas. ' Tahun Ajaran '. $ta->tahunajaran. ' Semester '. $this->input->get('semester') ; ?></h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
@@ -56,6 +56,7 @@
 								JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 								JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
 								WHERE tm_tingkat.id_tingkat = '".$tingkat->id_tingkat."'
+								AND tm_siswa.id_kelas = '$kelas->id_kelas'
 								ORDER BY tm_siswa.nama_lengkap ASC
 								")->result();
 
@@ -95,7 +96,7 @@
 											?>
 										</td>
 										<td>
-											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $siswa->NISN; ?>" data-idmatpel = "<?php echo $matpel->id_matpel; ?>" data-ta="<?php echo $ta->id_tahunajaran; ?>" data-idjeniskd="<?php echo $this->input->get('id_jenis_kd'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-idkd="<?php echo $item->id_kd; ?>" data-idtingkat="<?php echo $tingkat->id_tingkat; ?>" data-backdrop="static" data-keyboard="false">
+											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $siswa->NISN; ?>" data-idmatpel = "<?php echo $matpel->id_matpel; ?>" data-ta="<?php echo $ta->id_tahunajaran; ?>" data-idjeniskd="<?php echo $this->input->get('id_jenis_kd'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-idkd="<?php echo $item->id_kd; ?>" data-idtingkat="<?php echo $tingkat->id_tingkat; ?>" data-idkelas="<?php echo $kelas->id_kelas;?>" data-backdrop="static" data-keyboard="false">
 											<i class="icon-pencil3"></i>
 										</button>
 										</td>
@@ -150,7 +151,7 @@
 				<input type="hidden" name="semester" id="semester">
 				<input type="hidden" name="idkd" id="idkd">
 				<input type="hidden" name="idtingkat" id="idtingkat">
-
+				<input type="hidden" name="idkelas" id="idkelas">
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link" data-dismiss="modal">Tutup</button>
@@ -171,6 +172,7 @@
 	    var semester = $(this).data('semester');
 	    var idkd = $(this).data('idkd');
 	    var idtingkat = $(this).data('idtingkat');
+		var idkelas = $(this).data('idkelas');
 	    
 	    $.ajax({
 			type : "post",
@@ -181,7 +183,8 @@
 				"idjeniskd" : idjeniskd,
 				"semester" : semester,
 				"idkd" : idkd,
-				"idtingkat" : idtingkat
+				"idtingkat" : idtingkat,
+				"idkelas": idkelas
 		    },
 		    url: "<?php echo site_url('Nilai/Edit'); ?>",
 		    dataType: "json",
@@ -196,21 +199,24 @@
 		        	$('#semester').val(semester);
 		        	$('#idkd').val(idkd);
 		        	$('#idtingkat').val(idtingkat);
+					$('#idkelas').val(idkelas);
 
 		        	var listnilai = document.getElementById("listnilai");
 		        	var get = JSON.parse(data.data);
 		        	console.log(get);
+					
 		        	for(var i=0; i<get.length; i++){
 		        		listnilai.innerHTML += '\
-			        		<div class="form-group row">\
-								<label col-form-label col-lg-3>'+get[i].no_kd+'</label>\
-								<div class="col-lg-6	">\
-									<input type="text" class="form-control" name="nilai'+get[i].id_nilai+'" value="'+get[i].nilai+'">\
-								</div>\
+						<div class="form-group row">\
+							<label col-form-label col-lg-3>'+get[i].no_kd+'</label>\
+							<div class="col-lg-6	">\
+								<input type="text" class="form-control" name="nilai'+get[i].id_nilai+'" value="'+get[i].nilai+'">\
 							</div>\
-							<input type="hidden" name="id_nilai'+get[i].id_nilai+'" value="'+get[i].id_nilai+'">\
+						</div>\
+						<input type="hidden" name="id_nilai'+get[i].id_nilai+'" value="'+get[i].id_nilai+'">\
 		        		';
 		        	}
+					
 		        }else{
 		        	
 		        }

@@ -11,6 +11,7 @@ class Spiritual extends CI_Controller {
 
 		$data['tahunajaran'] = $this->M_model->read('tm_tahunajaran')->result();
 		$data['tingkat'] = $this->M_model->read('tm_tingkat', null, 'tingkat ASC')->result();
+		$data['kelas'] = $this->M_model->read('tm_kelas', array('id_kelas' => $this->session->userdata('walikelas')))->result();
 
 		$this->load->view('header', $data);
 		$this->load->view('spiritual/index', $data);
@@ -19,7 +20,10 @@ class Spiritual extends CI_Controller {
 	}
 
 	public function form(){
-		$tingkat = $this->input->get('id_tingkat');
+		$idkelas = $this->input->get("id_kelas");
+		$gettingkat = $this->M_model->read("tm_kelas",array("id_kelas" => $this->input->get("id_kelas")))->row();
+		
+		$tingkat = $gettingkat->id_tingkat;
 		$ta = $this->input->get('id_tahunajaran');
 		$semester = $this->input->get('semester');
 
@@ -35,8 +39,10 @@ class Spiritual extends CI_Controller {
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
 			WHERE tm_tingkat.id_tingkat = '$tingkat'
+			AND tm_siswa.id_kelas = '$idkelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
+		$data['tingkat'] = $gettingkat->id_tingkat;
 
 		$this->load->view('header', $data);
 		$this->load->view('spiritual/form', $data);
@@ -44,6 +50,7 @@ class Spiritual extends CI_Controller {
 	}
 
 	public function simpan(){
+		$id_kelas = $this->input->post('id_kelas');
 		$id_tingkat = $this->input->post('id_tingkat');
 		$id_tahunajaran = $this->input->post('id_tahunajaran');
 		$semester = $this->input->post('semester');
@@ -57,6 +64,7 @@ class Spiritual extends CI_Controller {
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
 			WHERE tm_tingkat.id_tingkat = '$id_tingkat'
+			AND tm_siswa.id_kelas = '$id_kelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
 
@@ -129,6 +137,7 @@ class Spiritual extends CI_Controller {
 	}
 
 	public function view(){
+		$idkelas = $this->input->get('id_kelas');
 		$tingkat = $this->input->get('id_tingkat');
 		$ta = $this->input->get('id_tahunajaran');
 		$semester = $this->input->get('semester');
@@ -144,7 +153,7 @@ class Spiritual extends CI_Controller {
 			FROM tm_siswa
 			JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 			JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
-			WHERE tm_tingkat.id_tingkat = '$tingkat'
+			WHERE tm_siswa.id_kelas = '$idkelas'
 			ORDER BY tm_siswa.nama_lengkap ASC
 		")->result();
 
@@ -157,7 +166,7 @@ class Spiritual extends CI_Controller {
 		$nisn = $this->input->post('nisn');
 		$ta = $this->input->post('ta');
 		$semester = $this->input->post('semester');
-		$idtingkat = $this->input->post('idtingkat');
+		$idkelas = $this->input->post('idkelas');
 		
 		$query = $this->db->query("
 			SELECT 
@@ -165,7 +174,7 @@ class Spiritual extends CI_Controller {
 			FROM
 				tr_nilai_spirit
 			WHERE 
-				NISN = '$nisn' AND id_tingkat = '$idtingkat' AND id_tahunajaran = '$ta' AND semester = '$semester'
+				NISN = '$nisn' AND id_kelas = '$idkelas' AND id_tahunajaran = '$ta' AND semester = '$semester'
 		")->row();
 		
 		if($query){

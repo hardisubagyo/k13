@@ -287,17 +287,11 @@
 					<div class="dropdown-menu dropdown-menu-left dropdown-content wmin-md-350">
 						<div class="dropdown-content-body p-1">
 							<div class="row no-gutters">
+								
 								<div class="col-12 col-sm-4">
 									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
 										<i class="icon-clippy icon-2x"></i>
 										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Rapor Siswa</div>
-									</a>
-								</div>
-
-								<div class="col-12 col-sm-4">
-									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
-										<i class="icon-stats-growth icon-2x"></i>
-										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Grafik Siswa</div>
 									</a>
 								</div>
 

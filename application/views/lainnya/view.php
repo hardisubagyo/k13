@@ -33,7 +33,7 @@
 			            	<?php echo $this->session->flashdata('success'); ?>
 			          	</div>
 			        <?php }else{} ?>
-					<form action="<?php echo site_url('Sosial/simpan'); ?>" method="post" >
+					
 						<div class="card-body" style="overflow-x:scroll;overflow-y:visible;">
 							<div class="col-md-12">
 								<table class="table" style="width: 2750px;">
@@ -76,19 +76,19 @@
 									<?php 
 										foreach($siswa as $rows){ 
 											$absen = $this->db->query("
-												SELECT * FROM tr_absen WHERE NISN = '".$rows->NISN."' AND id_tingkat = '".$this->input->get('id_tingkat')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+												SELECT * FROM tr_absen WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
 											")->row();
 
 											$fisik = $this->db->query("
-												SELECT * FROM tr_fisik WHERE NISN = '".$rows->NISN."' AND id_tingkat = '".$this->input->get('id_tingkat')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+												SELECT * FROM tr_fisik WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
 											")->row();
 
 											$prestasi = $this->db->query("
-												SELECT * FROM tr_prestasi WHERE NISN = '".$rows->NISN."' AND id_tingkat = '".$this->input->get('id_tingkat')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+												SELECT * FROM tr_prestasi WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
 											")->row();
 
 											$eks = $this->db->query("
-												SELECT * FROM tr_ekstra WHERE NISN = '".$rows->NISN."' AND id_tingkat = '".$this->input->get('id_tingkat')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+												SELECT * FROM tr_ekstra WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
 											")->row();
 									?>
 									<tr>
@@ -176,7 +176,7 @@
 										</td>
 
 										<td>
-											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $rows->NISN; ?>" data-idtingkat="<?php echo $this->input->get('id_tingkat'); ?>" data-idtahunajaran="<?php echo $this->input->get('id_tahunajaran'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-backdrop="static" data-keyboard="false">
+											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $rows->NISN; ?>" data-idkelas="<?php echo $this->input->get('id_kelas'); ?>" data-idtahunajaran="<?php echo $this->input->get('id_tahunajaran'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-backdrop="static" data-keyboard="false">
 												<i class="icon-pencil3"></i>
 											</button>
 										</td>
@@ -185,15 +185,10 @@
 								</table>
 							</div>
 							<hr>
-							<input type="hidden" name="id_tingkat" value="<?php echo $this->input->get('id_tingkat'); ?>">
+							<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
 							<input type="hidden" name="id_tahunajaran" value="<?php echo $this->input->get('id_tahunajaran'); ?>">
 							<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
 						</div>
-
-						<div class="card-footer">
-							<button type="submit" class="btn btn-success">Simpan <i class="icon-paperplane ml-2"></i></button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -225,7 +220,7 @@
 <script type="text/javascript">
   	$(document).on("click", ".Edit_Nilai", function () {
   		var nisn = $(this).data('nisn');
-  		var idtingkat = $(this).data('idtingkat');
+  		var idkelas = $(this).data('idkelas');
   		var idtahunajaran = $(this).data('idtahunajaran');
   		var semester = $(this).data('semester');
 
@@ -233,7 +228,7 @@
 			type : "post",
 		    data: {
 		        "nisn" : nisn,
-		        "idtingkat" : idtingkat,
+		        "idkelas" : idkelas,
 		        "idtahunajaran" : idtahunajaran,
 		        "semester" : semester
 		    },
@@ -348,7 +343,7 @@
 							</tr>\
 						</table>\
 						<input type="hidden" name="nisn" id="nisn">\
-						<input type="hidden" name="id_tingkat" id="id_tingkat">\
+						<input type="hidden" name="id_kelas" id="id_kelas">\
 						<input type="hidden" name="id_tahunajaran" id="id_tahunajaran">\
 						<input type="hidden" name="semester" id="semester">\
 						';
@@ -380,7 +375,7 @@
 					$('#prestasi').val(prestasi.prestasi);
 
 					$('#nisn').val(data.nisn);
-					$('#id_tingkat').val(data.id_tingkat);
+					$('#id_kelas').val(data.id_kelas);
 					$('#id_tahunajaran').val(data.id_tahunajaran);
 					$('#semester').val(data.semester);
 					

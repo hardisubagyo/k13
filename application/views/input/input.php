@@ -46,7 +46,9 @@
 								<input type="hidden" name="id_matpel" value="<?php echo $id_matpel; ?>">
 								<input type="hidden" name="id_jenis_kd" value="<?php echo $id_jenis_kd; ?>">
 								<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
+								<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
 								<?php
+									$idkelas = $this->input->get('id_kelas');
 									$getSiswa = $this->db->query("
 											SELECT 
 												tm_siswa.NISN, 
@@ -59,6 +61,7 @@
 											JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas
 											JOIN tm_tingkat ON tm_tingkat.id_tingkat = tm_kelas.id_tingkat
 											WHERE tm_tingkat.id_tingkat = '$tingkat->id_tingkat'
+											AND tm_siswa.id_kelas = '$idkelas'
 											ORDER BY tm_siswa.nama_lengkap ASC
 											")->result();
 									foreach($getSiswa as $siswa) {

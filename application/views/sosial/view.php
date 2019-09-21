@@ -60,12 +60,12 @@
 										<th>PB</th>
 									</tr>
 									<?php 
-										$id_tingkat = $this->input->get('id_tingkat');
+										$id_kelas = $this->input->get('id_kelas');
 										$id_tahunajaran = $this->input->get('id_tahunajaran');
 										$semester = $this->input->get('semester');
 
 										foreach($siswa as $item){ 
-										$getnilai = $this->db->query("SELECT * FROM tr_nilai_sosial WHERE NISN = '$item->NISN' AND id_tingkat = '$id_tingkat' AND id_tahunajaran = '$id_tahunajaran' AND semester = '$semester' ")->row();
+										$getnilai = $this->db->query("SELECT * FROM tr_nilai_sosial WHERE NISN = '$item->NISN' AND id_kelas = '$id_kelas' AND id_tahunajaran = '$id_tahunajaran' AND semester = '$semester' ")->row();
 										$jujur = explode("|", $getnilai->jujur);
 										$disiplin = explode("|", $getnilai->disiplin);
 										$TJ = explode("|", $getnilai->tanggung_jawab);
