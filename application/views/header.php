@@ -135,9 +135,6 @@
 									<i class="icon-primitive-square"></i> Master Jenis Kelamin
 								</a>
 								
-								<a href="<?php echo site_url('Kategori'); ?>" class="dropdown-item">
-									<i class="icon-primitive-square"></i> Master Kategori
-								</a>	
 								<a href="<?php echo site_url('Pegawai'); ?>" class="dropdown-item">
 									<i class="icon-primitive-square"></i> Master Pegawai
 								</a>
