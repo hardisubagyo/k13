@@ -9,7 +9,7 @@
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
 				<a href="<?php echo base_url(); ?>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-				<span class="breadcrumb-item active">Dashboard</span>
+				<span class="breadcrumb-item active">Dashboard 122</span>
 			</div>
 		</div>
 	</div>
