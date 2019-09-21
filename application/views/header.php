@@ -85,7 +85,7 @@
 				<li class="nav-item">
 					<a href="<?php echo base_url(); ?>" class="navbar-nav-link">
 						<i class="icon-home4 mr-2"></i>
-						Dashboard
+						Dashboard YUYUUYU
 					</a>
 				</li>
 
@@ -134,7 +134,7 @@
 								<a href="<?php echo site_url('Kelamin'); ?>" class="dropdown-item">
 									<i class="icon-primitive-square"></i> Master Jenis Kelamin
 								</a>
-								
+
 								<a href="<?php echo site_url('Pegawai'); ?>" class="dropdown-item">
 									<i class="icon-primitive-square"></i> Master Pegawai
 								</a>
