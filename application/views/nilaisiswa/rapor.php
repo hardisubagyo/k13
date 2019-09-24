@@ -86,12 +86,12 @@
 		                        <tr>
                                     <td width="5%">1</td>
                                     <td width="25%">Sikap Spiritual</td>
-                                    <td width="70%"></td>
+                                    <td width="70%"><?php echo $spiritual->deskripsi; ?></td>
                                 </tr>
                                 <tr>
                                     <td width="5%">2</td>
                                     <td width="25%">Sikap Sosial</td>
-                                    <td width="70%"></td>
+                                    <td width="70%"><?php echo $sosial->deskripsi; ?></td>
                                 </tr>
 		                    </tbody>
 		                </table>

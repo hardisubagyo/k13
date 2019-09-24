@@ -66,6 +66,32 @@ class Rapor extends CI_Controller {
 			WHERE tm_siswa.NISN = '$get[0]'
 		")->row();
 
+		$data['spiritual'] = $this->db->query("
+			SELECT 
+				* 
+			FROM 
+				tr_nilai_spirit
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
+		$data['sosial'] = $this->db->query("
+			SELECT 
+				* 
+			FROM 
+				tr_nilai_sosial
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
 		$this->load->view('header', $data);
 		$this->load->view('nilaisiswa/rapor', $data);
 		$this->load->view('footer');
