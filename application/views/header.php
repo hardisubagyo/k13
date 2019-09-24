@@ -198,7 +198,11 @@
 						</div>
 					</div>
 				</li>
-
+				
+				<?php
+					if($this->session->userdata('id_akses') == '2' || ($this->session->userdata('id_akses') == '1')){
+				?>
+										
 				<li class="nav-item nav-item-levels mega-menu-full">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-book2 mr-3"></i>
@@ -209,7 +213,7 @@
 						<div class="dropdown-content-body">
 							<div class="row">
 								<?php
-									if(($this->session->userdata('id_akses') == '2') || ($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
+									if(($this->session->userdata('id_akses') == '2')){
 								?>
 								<div class="col-md-3">
 									<div class="font-size-sm line-height-sm font-weight-semibold text-uppercase mt-1">Nilai Sikap</div>
@@ -259,7 +263,9 @@
 								</div>
 
 								<?php
-									if(($this->session->userdata('id_akses') == '2') || ($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
+									if(($this->session->userdata('id_akses') == '2')){
+									$id_kelas = $this->session->userdata("walikelas");
+									$getkelas  = $this->db->query("SELECT * FROM tm_kelas WHERE id_kelas = '$id_kelas'")->row();
 								?>
 								<div class="col-md-3">
 									<div class="font-size-sm line-height-sm font-weight-semibold text-uppercase mt-1">Lainnya</div>
@@ -275,10 +281,16 @@
 									</div>
 								</div>
 								<?php }else{} ?>
+								
+								
 							</div>
 						</div>
 					</div>
 				</li>
+
+				<?php
+					}else{}
+				?>
 
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
@@ -291,7 +303,7 @@
 							<div class="row no-gutters">
 								
 								<div class="col-12 col-sm-4">
-									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+									<a href="<?php echo site_url('Rapor'); ?>" class="d-block text-default text-center ripple-dark rounded p-3">
 										<i class="icon-clippy icon-2x"></i>
 										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Rapor Siswa</div>
 									</a>
@@ -306,11 +318,9 @@
 
 			<ul class="navbar-nav ml-md-auto">
 				
-
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-cog3"></i>
-						<span class="d-md-none ml-2">Settings</span>
+						<i class="icon-user"></i>&nbsp;<?php echo $this->session->userdata('nama_pegawai'); ?>
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right">

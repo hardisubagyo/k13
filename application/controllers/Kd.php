@@ -9,7 +9,7 @@ class Kd extends CI_Controller {
 		$data['header'] = 'Kompetensi Dasar';
 
 		$data['kd'] = $this->M_model->kd()->result();
-		$data['matpel'] = $this->M_model->read('tm_matpel')->result();
+		$data['matpel'] = $this->M_model->matpel()->result();
 		$data['jenis_kd'] = $this->M_model->read('tm_jenis_kd')->result();
 		$data['tingkat'] = $this->M_model->read('tm_tingkat')->result();
 

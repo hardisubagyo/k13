@@ -19,7 +19,7 @@
 
 			<div class="card">
 				<div class="card-header bg-success text-white header-elements-inline">
-					<h6 class="card-title"><?php echo $header .' Mata Pelajaran '. $matpel->nama_matpel . ' Kompetensi '. $jenis_kd->nama_jenis_kd .' Kelas '. $kelas->kelas. ' Tahun Ajaran '. $ta->tahunajaran. ' Semester '. $this->input->get('semester') ; ?></h6>
+				<h6 class="card-title"><?php echo $header .' Mata Pelajaran '. $matpel->nama_matpel . ' Kompetensi '. $jenis_kd->nama_jenis_kd .' Kelas '. $kelas->kelas. ' Tahun Ajaran '. $ta->tahunajaran. ' Semester '. $this->input->get('semester') ; ?></h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>

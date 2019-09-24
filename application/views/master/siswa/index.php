@@ -175,15 +175,6 @@
 												<option value="<?php echo $item->id_kelas; ?>"><?php echo $item->kelas; ?></option>
 											<?php } ?>
 										</select>
-									</div>	
-
-									<div class="form-group">
-										<label>Kategori</label>
-										<select name="id_kategori" class="form-control">
-											<?php foreach($kategori as $item){ ?>
-												<option value="<?php echo $item->id_kategori; ?>"><?php echo $item->nama_kategori; ?></option>
-											<?php } ?>
-										</select>
 									</div>
 
 									<div class="form-group">
@@ -377,15 +368,6 @@
 												<option value="<?php echo $item->id_kelas; ?>"><?php echo $item->kelas; ?></option>
 											<?php } ?>
 										</select>
-									</div>	
-
-									<div class="form-group">
-										<label>Kategori</label>
-										<select name="id_kategori" id="id_kategori" class="form-control">
-											<?php foreach($kategori as $item){ ?>
-												<option value="<?php echo $item->id_kategori; ?>"><?php echo $item->nama_kategori; ?></option>
-											<?php } ?>
-										</select>
 									</div>
 
 									<div class="form-group">
@@ -530,7 +512,6 @@
 		        	document.getElementById("id_jenkel").value = get.id_jenkel;
 		        	document.getElementById("id_agama").value = get.id_agama;
 		        	document.getElementById("id_kelas").value = get.id_kelas;
-		        	document.getElementById("id_kategori").value = get.id_kategori;
 		        }else{
 		        	
 		        }

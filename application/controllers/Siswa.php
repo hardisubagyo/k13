@@ -12,7 +12,6 @@ class Siswa extends CI_Controller {
 		$data['kelamin'] = $this->M_model->read('tm_jenkel')->result();
 		$data['agama'] = $this->M_model->read('tm_agama')->result();
 		$data['kelas'] = $this->M_model->kelas()->result();
-		$data['kategori'] = $this->M_model->read('tm_kategori')->result();
 
 		$this->load->view('header', $data);
 		$this->load->view('master/siswa/index', $data);
@@ -36,7 +35,6 @@ class Siswa extends CI_Controller {
 				"id_jenkel" => $this->input->post("id_jenkel"),
 				"id_agama" => $this->input->post("id_agama"),
 				"id_kelas" => $this->input->post("id_kelas"),
-				"id_kategori" => $this->input->post("id_kategori"),
 				"nama_ayah" => $this->input->post("nama_ayah"),
 				"nama_ibu" => $this->input->post("nama_ibu"),
 				"pek_ayah" => $this->input->post("pek_ayah"),
@@ -111,7 +109,6 @@ class Siswa extends CI_Controller {
 			"id_jenkel" => $this->input->post("id_jenkel"),
 			"id_agama" => $this->input->post("id_agama"),
 			"id_kelas" => $this->input->post("id_kelas"),
-			"id_kategori" => $this->input->post("id_kategori"),
 			"nama_ayah" => $this->input->post("nama_ayah"),
 			"nama_ibu" => $this->input->post("nama_ibu"),
 			"pek_ayah" => $this->input->post("pek_ayah"),

@@ -26,169 +26,161 @@
 	                	</div>
                 	</div>
 				</div>
-				<div class="card-body">
-					<?php if($this->session->flashdata('success')){ ?>
-			          	<div class="alert alert-primary border-0 alert-dismissible">
-			          		<a class="close" data-dismiss="alert" href="#">×</a>
-			            	<?php echo $this->session->flashdata('success'); ?>
-			          	</div>
-			        <?php }else{} ?>
-					
-						<div class="card-body" style="overflow-x:scroll;overflow-y:visible;">
-							<div class="col-md-12">
-								<table class="table" style="width: 2750px;">
-									<tr class="bg-success" align="center">
-										<th rowspan="3" width="200px">Nama Siswa</th>
-										<th colspan="6">Ekstrakulikuler</th>
-										<th colspan="3">Absen</th>
-										<th rowspan="3" width="300px">Keterangan</th>
-										<th colspan="4">Ukuran Badan</th>
-										<th colspan="3">Kondisi Kesehatan</th>
-										<th rowspan="3" width="300px">Prestasi</th>
-										<th rowspan="3" width="50px">Aksi</th>
-									</tr>
-									<tr class="bg-success" align="center">
-										<th colspan="2">Pilihan 1</th>
-										<th colspan="2">Pilihan 2</th>
-										<th colspan="2">Pilihan 3</th>
-										<th rowspan="2" width="100px">Sakit</th>
-										<th rowspan="2" width="100px">Ijin</th>
-										<th rowspan="2" width="100px">Alpa</th>
-										<th colspan="2">Ganjil</th>
-										<th colspan="2">Genap</th>
-										<th rowspan="2" width="150px">Pendengaran</th>
-										<th rowspan="2" width="150px">Penglihatan</th>
-										<th rowspan="2" width="150px">Gigi</th>
-									</tr>
-									<tr class="bg-success" align="center">
-										<th width="150px">Nama</th>
-										<th width="100px">Nilai</th>
-										<th width="150px">Nama</th>
-										<th width="100px">Nilai</th>
-										<th width="150px">Nama</th>
-										<th width="100px">Nilai</th>
-										<th width="100px">Tinggi</th>
-										<th width="100px">Berat</th>
-										<th width="100px">Tinggi</th>
-										<th width="100px">Berat</th>
+				
+				<div class="card-body" style="overflow-x:scroll;overflow-y:visible;">
+					<div class="col-md-12">
+						<table class="table" style="width: 2750px;">
+							<tr class="bg-success" align="center">
+								<th rowspan="3" width="200px">Nama Siswa</th>
+								<th colspan="6">Ekstrakulikuler</th>
+								<th colspan="3">Absen</th>
+								<th rowspan="3" width="300px">Keterangan</th>
+								<th colspan="4">Ukuran Badan</th>
+								<th colspan="3">Kondisi Kesehatan</th>
+								<th rowspan="3" width="300px">Prestasi</th>
+								<th rowspan="3" width="50px">Aksi</th>
+							</tr>
+							<tr class="bg-success" align="center">
+								<th colspan="2">Pilihan 1</th>
+								<th colspan="2">Pilihan 2</th>
+								<th colspan="2">Pilihan 3</th>
+								<th rowspan="2" width="100px">Sakit</th>
+								<th rowspan="2" width="100px">Ijin</th>
+								<th rowspan="2" width="100px">Alpa</th>
+								<th colspan="2">Ganjil</th>
+								<th colspan="2">Genap</th>
+								<th rowspan="2" width="150px">Pendengaran</th>
+								<th rowspan="2" width="150px">Penglihatan</th>
+								<th rowspan="2" width="150px">Gigi</th>
+							</tr>
+							<tr class="bg-success" align="center">
+								<th width="150px">Nama</th>
+								<th width="100px">Nilai</th>
+								<th width="150px">Nama</th>
+								<th width="100px">Nilai</th>
+								<th width="150px">Nama</th>
+								<th width="100px">Nilai</th>
+								<th width="100px">Tinggi</th>
+								<th width="100px">Berat</th>
+								<th width="100px">Tinggi</th>
+								<th width="100px">Berat</th>
 
-									</tr>
-									<?php 
-										foreach($siswa as $rows){ 
-											$absen = $this->db->query("
-												SELECT * FROM tr_absen WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
-											")->row();
+							</tr>
+							<?php 
+								foreach($siswa as $rows){ 
+									$absen = $this->db->query("
+										SELECT * FROM tr_absen WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+									")->row();
 
-											$fisik = $this->db->query("
-												SELECT * FROM tr_fisik WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
-											")->row();
+									$fisik = $this->db->query("
+										SELECT * FROM tr_fisik WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+									")->row();
 
-											$prestasi = $this->db->query("
-												SELECT * FROM tr_prestasi WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
-											")->row();
+									$prestasi = $this->db->query("
+										SELECT * FROM tr_prestasi WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+									")->row();
 
-											$eks = $this->db->query("
-												SELECT * FROM tr_ekstra WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
-											")->row();
-									?>
-									<tr>
-										<td><?php echo $rows->nama_lengkap; ?></td>
-										<!-- Pilihan 1 -->
-										<td>
-											<select class="form-control" name="id_tm_ekstra_1-<?php echo $rows->NISN; ?>" readonly>
-												<?php foreach($ekstra as $item){ ?>
-												<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_1){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
-												<?php } ?>
-											</select>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="nilai-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai; ?>" readonly>
-										</td>
+									$eks = $this->db->query("
+										SELECT * FROM tr_ekstra WHERE NISN = '".$rows->NISN."' AND id_kelas = '".$this->input->get('id_kelas')."' AND id_tahunajaran = '".$this->input->get('id_tahunajaran')."' AND semester = '".$this->input->get('semester')."'
+									")->row();
+							?>
+							<tr>
+								<td><?php echo $rows->nama_lengkap; ?></td>
+								<!-- Pilihan 1 -->
+								<td>
+									<select class="form-control" name="id_tm_ekstra_1-<?php echo $rows->NISN; ?>" readonly>
+										<?php foreach($ekstra as $item){ ?>
+										<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_1){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="nilai-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai; ?>" readonly>
+								</td>
 
-										<!-- Pilihan 2 -->
-										<td>
-											<select class="form-control" name="id_tm_ekstra_2-<?php echo $rows->NISN; ?>" readonly>
-												<?php foreach($ekstra as $item){ ?>
-												<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_2){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
-												<?php } ?>
-											</select>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="nilai_2-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai_2; ?>" readonly>
-										</td>
+								<!-- Pilihan 2 -->
+								<td>
+									<select class="form-control" name="id_tm_ekstra_2-<?php echo $rows->NISN; ?>" readonly>
+										<?php foreach($ekstra as $item){ ?>
+										<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_2){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="nilai_2-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai_2; ?>" readonly>
+								</td>
 
-										<!-- Pilihan 2 -->
-										<td>
-											<select class="form-control" name="id_tm_ekstra_3-<?php echo $rows->NISN; ?>" readonly>
-												<?php foreach($ekstra as $item){ ?>
-												<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_3){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
-												<?php } ?>
-											</select>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="nilai_3-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai_3; ?>" readonly>
-										</td>
+								<!-- Pilihan 2 -->
+								<td>
+									<select class="form-control" name="id_tm_ekstra_3-<?php echo $rows->NISN; ?>" readonly>
+										<?php foreach($ekstra as $item){ ?>
+										<option value="<?php echo $item->id_tm_ekstra; ?>" <?php if($item->id_tm_ekstra == $eks->id_tm_ekstra_3){echo "selected";}else{} ?>><?php echo $item->nama_ekstra; ?></option>
+										<?php } ?>
+									</select>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="nilai_3-<?php echo $rows->NISN; ?>" value="<?php echo $eks->nilai_3; ?>" readonly>
+								</td>
 
-										<!-- Absen -->
-										<td>
-											<input type="text" class="form-control" name="sakit-<?php echo $rows->NISN; ?>" value="<?php echo $absen->sakit; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="ijin-<?php echo $rows->NISN; ?>" value="<?php echo $absen->ijin; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="alpa-<?php echo $rows->NISN; ?>" value="<?php echo $absen->alpa; ?>" readonly>
-										</td>
+								<!-- Absen -->
+								<td>
+									<input type="text" class="form-control" name="sakit-<?php echo $rows->NISN; ?>" value="<?php echo $absen->sakit; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="ijin-<?php echo $rows->NISN; ?>" value="<?php echo $absen->ijin; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="alpa-<?php echo $rows->NISN; ?>" value="<?php echo $absen->alpa; ?>" readonly>
+								</td>
 
-										<!-- Keterangan -->
-										<td>
-											<textarea class="form-control" name="saran-<?php echo $rows->NISN; ?>" readonly><?php echo $absen->saran; ?></textarea>
-										</td>
+								<!-- Keterangan -->
+								<td>
+									<textarea class="form-control" name="saran-<?php echo $rows->NISN; ?>" readonly><?php echo $absen->saran; ?></textarea>
+								</td>
 
-										<!-- Ukuran Badan -->
-										<td>
-											<input type="text" class="form-control" name="tinggi_1-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->tinggi_1; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="berat_1-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->berat_1; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="tinggi_2-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->tinggi_2; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="berat_2-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->berat_2; ?>" readonly>
-										</td>
+								<!-- Ukuran Badan -->
+								<td>
+									<input type="text" class="form-control" name="tinggi_1-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->tinggi_1; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="berat_1-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->berat_1; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="tinggi_2-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->tinggi_2; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="berat_2-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->berat_2; ?>" readonly>
+								</td>
 
-										<!-- Kesehatan -->
-										<td>
-											<input type="text" class="form-control" name="pendengaran-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->pendengaran; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="penglihatan-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->penglihatan; ?>" readonly>
-										</td>
-										<td>
-											<input type="text" class="form-control" name="gigi-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->gigi; ?>" readonly>
-										</td>
+								<!-- Kesehatan -->
+								<td>
+									<input type="text" class="form-control" name="pendengaran-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->pendengaran; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="penglihatan-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->penglihatan; ?>" readonly>
+								</td>
+								<td>
+									<input type="text" class="form-control" name="gigi-<?php echo $rows->NISN; ?>" value="<?php echo $fisik->gigi; ?>" readonly>
+								</td>
 
-										<!-- Prestasi -->
-										<td>
-											<textarea class="form-control" name="prestasi-<?php echo $rows->NISN; ?>" readonly><?php echo $prestasi->prestasi; ?></textarea>
-										</td>
+								<!-- Prestasi -->
+								<td>
+									<textarea class="form-control" name="prestasi-<?php echo $rows->NISN; ?>" readonly><?php echo $prestasi->prestasi; ?></textarea>
+								</td>
 
-										<td>
-											<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $rows->NISN; ?>" data-idkelas="<?php echo $this->input->get('id_kelas'); ?>" data-idtahunajaran="<?php echo $this->input->get('id_tahunajaran'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-backdrop="static" data-keyboard="false">
-												<i class="icon-pencil3"></i>
-											</button>
-										</td>
-									</tr>
-									<?php } ?>
-								</table>
-							</div>
-							<hr>
-							<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
-							<input type="hidden" name="id_tahunajaran" value="<?php echo $this->input->get('id_tahunajaran'); ?>">
-							<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
-						</div>
+								<td>
+									<button type="button" class="btn btn-outline bg-brown text-brown-800 btn-icon ml-2 Edit_Nilai" data-toggle="modal" data-target="#Edit_Nilai" data-nisn="<?php echo $rows->NISN; ?>" data-idkelas="<?php echo $this->input->get('id_kelas'); ?>" data-idtahunajaran="<?php echo $this->input->get('id_tahunajaran'); ?>" data-semester="<?php echo $this->input->get('semester'); ?>" data-backdrop="static" data-keyboard="false">
+										<i class="icon-pencil3"></i>
+									</button>
+								</td>
+							</tr>
+							<?php } ?>
+						</table>
+					</div>
+					<hr>
+					<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
+					<input type="hidden" name="id_tahunajaran" value="<?php echo $this->input->get('id_tahunajaran'); ?>">
+					<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
 				</div>
 			</div>
 		</div>

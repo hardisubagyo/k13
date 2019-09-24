@@ -11,7 +11,6 @@ class Pegawai extends CI_Controller {
 		$data['pegawai'] = $this->M_model->pegawai()->result();
 		$data['akses'] = $this->M_model->read('tm_akses')->result();
 		$data['kelas'] = $this->M_model->read('tm_kelas')->result();
-		$data['kategori'] = $this->M_model->read('tm_kategori')->result();
 		$data['matpel'] = $this->M_model->matpel()->result();
 
 		$this->load->view('header', $data);
@@ -26,7 +25,6 @@ class Pegawai extends CI_Controller {
 
 		$data['akses'] = $this->M_model->read('tm_akses')->result();
 		$data['kelas'] = $this->M_model->read('tm_kelas')->result();
-		$data['kategori'] = $this->M_model->read('tm_kategori')->result();
 		$data['matpel'] = $this->M_model->matpel()->result();
 
 		$this->load->view('header', $data);
