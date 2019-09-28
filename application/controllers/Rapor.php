@@ -229,6 +229,8 @@ class Rapor extends CI_Controller {
 
 		$data['ekstra'] = $eksta;
 
+		$data['absen'] = $this->M_model->read('tr_absen',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
+
 		$this->load->view('header', $data);
 		$this->load->view('nilaisiswa/rapor', $data);
 		$this->load->view('footer');

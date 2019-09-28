@@ -171,6 +171,19 @@
                                 <?php } ?>
                             </tbody>
                         </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th><h5><b>D. Saran - saran</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr>
+                                    <td><?php echo $absen->saran; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
 					</div>
                 </div>
 				

@@ -35,7 +35,7 @@
 										<th rowspan="3" width="200px">Nama Siswa</th>
 										<th colspan="6">Ekstrakulikuler</th>
 										<th colspan="3">Absen</th>
-										<th rowspan="3" width="300px">Keterangan</th>
+										<th rowspan="3" width="300px">Saran</th>
 										<th colspan="4">Ukuran Badan</th>
 										<th colspan="3">Kondisi Kesehatan</th>
 										<th rowspan="3" width="300px">Prestasi</th>
