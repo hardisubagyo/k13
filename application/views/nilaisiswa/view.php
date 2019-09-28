@@ -68,6 +68,12 @@
                                             <i class="icon-file-eye"></i>
                                         </button>
                                     </a>
+
+                                    <a href="<?php echo site_url('Rapor/cetak/'.base64_encode($param)); ?>">
+                                        <button type="button" class="btn btn-outline bg-success text-success-800 btn-icon ml-2">
+                                            <i class="icon-printer2"></i>
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             <?php 
