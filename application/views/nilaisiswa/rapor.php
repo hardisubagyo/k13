@@ -184,6 +184,105 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th colspan="4"><h5><b>E. Tinggi dan Berat Badan</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr align="center">
+                                    <td rowspan="2" width="5%">NO</td>
+                                    <td rowspan="2" width="45%">Aspek yang dinilai</td>
+                                    <td colspan="2">Semester</td>
+                                </tr>
+                                <tr align="center">
+                                    <td>1</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Tiggi Badan</td>
+                                    <td><?php echo $fisik->tinggi_1; ?> cm</td>
+                                    <td><?php echo $fisik->tinggi_2; ?> cm</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Berat Badan</td>
+                                    <td><?php echo $fisik->berat_1; ?> kg</td>
+                                    <td><?php echo $fisik->berat_2; ?> kg</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th colspan="4"><h5><b>F. Kondisi Kesehatan</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr align="center">
+                                    <td width="10%">No</td>
+                                    <td width="35%">Aspek Fisik</td>
+                                    <td width="55%">Keterangan</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Pendengaran</td>
+                                    <td><?php echo $fisik->pendengaran; ?> kg</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Penglihatan</td>
+                                    <td><?php echo $fisik->penglihatan; ?> kg</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Gigi</td>
+                                    <td><?php echo $fisik->gigi; ?> kg</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th><h5><b>G. Prestasi</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr>
+                                    <td><?php echo $prestasi->prestasi; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th colspan="4"><h5><b>H. Ketidakhadiran</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr>
+                                    <td width="5%">1</td>
+                                    <td width="25%">Sakit</td>
+                                    <td width="70%"><?php echo $absen->sakit; ?> kg</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Izin</td>
+                                    <td><?php echo $absen->ijin; ?> kg</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Tanpa Keterangan</td>
+                                    <td><?php echo $absen->alpa; ?> kg</td>
+                                </tr>
+                            </tbody>
+                        </table>
 					</div>
                 </div>
 				

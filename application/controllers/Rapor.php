@@ -231,6 +231,10 @@ class Rapor extends CI_Controller {
 
 		$data['absen'] = $this->M_model->read('tr_absen',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
 
+		$data['fisik'] = $this->M_model->read('tr_fisik',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
+
+		$data['prestasi'] = $this->M_model->read('tr_prestasi',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
+
 		$this->load->view('header', $data);
 		$this->load->view('nilaisiswa/rapor', $data);
 		$this->load->view('footer');
