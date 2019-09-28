@@ -155,10 +155,79 @@ class Rapor extends CI_Controller {
 				"JenisKD" => $JenisKD
 			));
 		}
-
-		//echo json_encode($jm);
-		
 		$data['nilai'] = $jm;
+
+		$eksta = array();
+		$getekstra = $this->db->query("
+			SELECT 
+				*
+			FROM tr_ekstra
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
+		$nilaiekstra1 = $this->db->query("
+			SELECT 
+				tm_ekstra.nama_ekstra,
+				tr_ekstra.nilai
+			FROM tr_ekstra
+			JOIN tm_ekstra ON tm_ekstra.id_tm_ekstra = tr_ekstra.id_tm_ekstra_1
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
+		$nilaiekstra2 = $this->db->query("
+			SELECT 
+				tm_ekstra.nama_ekstra,
+				tr_ekstra.nilai_2
+			FROM tr_ekstra
+			JOIN tm_ekstra ON tm_ekstra.id_tm_ekstra = tr_ekstra.id_tm_ekstra_2
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
+		$nilaiekstra3 = $this->db->query("
+			SELECT 
+				tm_ekstra.nama_ekstra,
+				tr_ekstra.nilai_3
+			FROM tr_ekstra
+			JOIN tm_ekstra ON tm_ekstra.id_tm_ekstra = tr_ekstra.id_tm_ekstra_3
+			WHERE 
+				NISN = '$get[0]'
+			AND 
+				id_tahunajaran = '$get[1]'
+			AND 
+				semester = '$get[2]'
+		")->row();
+
+		array_push($eksta, 
+			array(
+				"nama" => $nilaiekstra1->nama_ekstra,
+				"nilai" => $nilaiekstra1->nilai
+			),
+			array(
+				"nama" => $nilaiekstra2->nama_ekstra,
+				"nilai" => $nilaiekstra2->nilai_2
+			),
+			array(
+				"nama" => $nilaiekstra3->nama_ekstra,
+				"nilai" => $nilaiekstra3->nilai_3
+			)
+		);
+
+		$data['ekstra'] = $eksta;
 
 		$this->load->view('header', $data);
 		$this->load->view('nilaisiswa/rapor', $data);

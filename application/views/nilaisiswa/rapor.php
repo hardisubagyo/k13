@@ -149,8 +149,28 @@
                                 <?php } ?>
                             </tbody>
                         </table>
-
-                        
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th colspan="3"><h5><b>C. EKSTRA KULIKULER</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr>
+                                    <td width="5%">No</td>
+                                    <td width="15%">Kegiatan Ekstra Kurikuler</td>
+                                    <td width="80%">Keterangan</td>
+                                </tr>
+                                <?php $no = 1; foreach($ekstra as $row) { ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $row['nama']; ?></td>
+                                    <td><?php echo $row['nilai']; ?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
 					</div>
                 </div>
 				
