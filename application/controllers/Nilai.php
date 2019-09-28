@@ -74,17 +74,36 @@ class Nilai extends CI_Controller {
 			WHERE tr_nilai_matpel.NISN = '$nisn' AND tr_nilai_matpel.id_matpel = '$idmatpel' AND tr_nilai_matpel.id_tahunajaran = '$ta' AND tr_nilai_matpel.semester = '$semester' AND tr_nilai_matpel.id_jenis_kd = '$idjeniskd' AND tr_nilai_matpel.id_tingkat = '$idtingkat'
 		")->result();
 
+		$keterangan = $this->db->query("
+			SELECT 
+				*
+			FROM 
+				tr_katerangan
+			WHERE 
+				NISN = '$nisn' 
+			AND 
+				id_matpel = '$idmatpel' 
+			AND 
+				id_tahunajaran = '$ta' 
+			AND 
+				semester = '$semester' 
+			AND 
+				id_jenis_kd = '$idjeniskd'
+		")->row();
+
 		if($query){
 			$output = array(
 				'status' => '1',
 				'message' => 'Berhasil',
-				'data' => json_encode($query)
+				'data' => json_encode($query),
+				'keterangan' => json_encode($keterangan)
 			);
 		}else{
 			$output = array(
 				'status' => '0',
 				'message' => 'Gagal',
-				'data' => json_encode($query)
+				'data' => json_encode($query),
+				'keterangan' => json_encode($keterangan)
 			);
 		}
 
@@ -115,6 +134,8 @@ class Nilai extends CI_Controller {
 			
 			$this->M_model->update('tr_nilai_matpel',array('nilai' => $this->input->post("nilai".$item->id_nilai)), array('id_nilai' => $this->input->post("id_nilai".$item->id_nilai)));
 		}
+
+		$this->M_model->update('tr_katerangan',array('keterangan' => $this->input->post("keterangan")), array('id_keterangan' => $this->input->post("id_keterangan")));
 
 		redirect(site_url('Nilai/View?id_jenis_kd='.$idjeniskd.'&id_matpel='.$idmatpel.'&id_kelas='.$idkelas.'&id_tahunajaran='.$ta.'&semester='.$semester.''));
 	}

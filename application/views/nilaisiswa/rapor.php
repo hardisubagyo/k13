@@ -2,10 +2,10 @@
 <div class="page-header">
 	<div class="page-header-content header-elements-md-inline">
 		<div class="page-title d-flex">
-			<h4>
+			<h5>
 				<i class="icon-menu mr-2"></i>
 				<span class="font-weight-semibold"><?php echo $title; ?></span>
-			</h4>
+			</h5>
 			<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 						<table class="table">
 		                    <thead>
 		                        <tr align="center">
-		                            <th colspan="6"><h4>RAPOR DAN PROFIL PESERTA DIDIK</h4></th>
+		                            <th colspan="6"><h5><b>RAPOR DAN PROFIL PESERTA DIDIK</b></h5></th>
 		                        </tr>
 		                    </thead>
 		                    <tbody>
@@ -72,7 +72,7 @@
                                 </tr>
 		                    </tbody>
                         </table>
-                        
+                        <hr>
                         <table class="table">
 		                    <thead>
 		                        <tr>
@@ -86,15 +86,71 @@
 		                        <tr>
                                     <td width="5%">1</td>
                                     <td width="25%">Sikap Spiritual</td>
-                                    <td width="70%"><?php echo $spiritual->deskripsi; ?></td>
+                                    <td width="70%">
+                                        <?php 
+                                            if(!empty($spiritual->deskripsi)){
+                                                echo $spiritual->deskripsi; 
+                                            }else{
+                                                echo "-";
+                                            }
+                                        ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width="5%">2</td>
                                     <td width="25%">Sikap Sosial</td>
-                                    <td width="70%"><?php echo $sosial->deskripsi; ?></td>
+                                    <td width="70%">
+                                        <?php 
+                                            if(!empty($sosial->deskripsi)){
+                                                echo $sosial->deskripsi; 
+                                            }else{
+                                                echo "-";
+                                            }; 
+                                        ?>
+                                    </td>
                                 </tr>
 		                    </tbody>
-		                </table>
+                        </table>
+                        <hr>
+                        <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th colspan="8"><h5><b>B. KOMPETENSI PENGETAHUAN DAN KETERAMPILAN</b></h5></th>
+                                </tr>
+		                    </thead>
+		                    <tbody>
+                                <tr align="center">
+                                    <td rowspan="2">NO</td>
+                                    <td rowspan="2">Mata Pelajaran</td>
+                                    <td colspan="3">Pengetahuan</td>
+                                    <td colspan="3">Keterampilan</td>
+                                </tr>
+                                <tr align="center">
+                                    <td>Nilai</td>
+                                    <td>Predikat</td>
+                                    <td>Deskripsi</td>
+                                    <td>Nilai</td>
+                                    <td>Predikat</td>
+                                    <td>Deskripsi</td>
+                                </tr>
+                                <?php 
+                                    $no = 1;
+                                    foreach($nilai as $item){ ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $item['MataPelajaran']; ?></td>
+                                        <td><?php echo round($item['JenisKD'][0]['Nilai'], 2) ; ?></td>
+                                        <td><?php echo $item['JenisKD'][0]['Predikat']; ?></td>
+                                        <td><?php echo $item['JenisKD'][0]['Deskripsi']; ?></td>
+                                        <td><?php echo round($item['JenisKD'][1]['Nilai'], 2); ?></td>
+                                        <td><?php echo $item['JenisKD'][1]['Predikat']; ?></td>
+                                        <td><?php echo $item['JenisKD'][1]['Deskripsi']; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+
+                        
 					</div>
                 </div>
 				

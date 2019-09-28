@@ -1,3 +1,38 @@
+<style>
+	input[type=text], select {
+		width: 100%;
+		padding: 5px 5px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	#customers {
+		font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	#customers td, #customers th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+
+	#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+	#customers tr:hover {background-color: #ddd;}
+
+	#customers th {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #4CAF50;
+		color: white;
+	}
+</style>
+
 <!-- Page header -->
 <div class="page-header">
 	<div class="page-header-content header-elements-md-inline">
@@ -141,7 +176,9 @@
 				</div>
 
 				<div class="modal-body">
-					<div id="listnilai"></div>
+					<fieldset class="mb-3">
+						<div id="listnilai"></div>
+					</fieldset>
 				</div>
 
 				<input type="hidden" name="nisn" id="nisn">
@@ -201,21 +238,49 @@
 		        	$('#idtingkat').val(idtingkat);
 					$('#idkelas').val(idkelas);
 
+					// Create new link Element 
+					var link = document.createElement('link'); 
+					link.rel = 'stylesheet'; 
+					link.type = 'text/css'; 
+					link.href = 'style.css';  
+					document.getElementsByTagName('HEAD')[0].appendChild(link);  
+
 		        	var listnilai = document.getElementById("listnilai");
 		        	var get = JSON.parse(data.data);
+					var ket = JSON.parse(data.keterangan);
 		        	console.log(get);
-					
+
+					var nilai = '<table id="customers">\
+							<tr>\
+								<th width="40%">No Kompetensi Dasar</th>\
+								<th width="60%">Nilai</th>\
+							</tr>';
+
 		        	for(var i=0; i<get.length; i++){
-		        		listnilai.innerHTML += '\
-						<div class="form-group row">\
-							<label col-form-label col-lg-3>'+get[i].no_kd+'</label>\
-							<div class="col-lg-6	">\
-								<input type="text" class="form-control" name="nilai'+get[i].id_nilai+'" value="'+get[i].nilai+'">\
-							</div>\
-						</div>\
-						<input type="hidden" name="id_nilai'+get[i].id_nilai+'" value="'+get[i].id_nilai+'">\
-		        		';
+		        		nilai += '\
+							<tr>\
+								<td>'+get[i].no_kd+'</td>\
+								<td>\
+									<input type="text" name="nilai'+get[i].id_nilai+'" value="'+get[i].nilai+'">\
+									<input type="hidden" name="id_nilai'+get[i].id_nilai+'" value="'+get[i].id_nilai+'">\
+								</td>\
+							</tr>\
+						';
 		        	}
+
+					nilai += '\
+						<tr>\
+							<td>Deskripsi</td>\
+							<td>\
+								<textarea rows="3" cols="3" class="form-control" name="keterangan" placeholder="Default textarea">'+ket.keterangan+'</textarea>\
+								<input type="hidden" name="id_keterangan" value="'+ket.id_keterangan+'">\
+							</td>\
+						</tr>\
+					';
+
+					nilai += '</table>';
+
+					listnilai.innerHTML = nilai;
 					
 		        }else{
 		        	

@@ -92,6 +92,74 @@ class Rapor extends CI_Controller {
 				semester = '$get[2]'
 		")->row();
 
+		$idtingkat = $this->db->query("SELECT tm_kelas.id_tingkat FROM tm_siswa JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas WHERE tm_siswa.NISN = '$get[0]' ")->row();
+
+		$jm = array();
+		$matapelajaran = $this->db->query("
+				SELECT 
+					DISTINCT m.nama_matpel, m.id_matpel
+				FROM 
+					tm_matpel as m
+				JOIN tm_kd as k ON k.id_matpel = m.id_matpel
+				WHERE k.id_tingkat = '$idtingkat->id_tingkat'
+			")->result();
+		foreach($matapelajaran as $item){
+
+			$JenisKD = array();
+			$jenis_kd = $this->M_model->read('tm_jenis_kd')->result();
+			foreach($jenis_kd as $jenis){
+				$nilai = $this->db->query("
+					SELECT 
+						AVG(nilai) as nilai 
+					FROM 
+						tr_nilai_matpel 
+					WHERE 
+						NISN='$get[0]' 
+					AND 
+						id_matpel = '$item->id_matpel' 
+					AND 
+						id_tahunajaran = '$get[1]'
+					AND 
+						semester = '$get[2]'
+					AND 
+						id_jenis_kd = '$jenis->id_jenis_kd'
+				")->row();
+
+				$deskripsi = $this->db->query("
+					SELECT 
+						keterangan
+					FROM 
+						tr_katerangan
+					WHERE 
+						NISN='$get[0]' 
+					AND 
+						id_matpel = '$item->id_matpel' 
+					AND 
+						id_tahunajaran = '$get[1]' 
+					AND 
+						semester = '$get[2]'
+					AND 
+						id_jenis_kd = '$jenis->id_jenis_kd'
+				")->row();
+
+				array_push($JenisKD, array(
+					"JenisMatpel" => $jenis->nama_jenis_kd,
+					"Nilai" => $nilai->nilai,
+					"Predikat" => "",
+					"Deskripsi" => $deskripsi->keterangan
+				));
+			}
+			
+			array_push($jm, array(
+				"MataPelajaran" => $item->nama_matpel,
+				"JenisKD" => $JenisKD
+			));
+		}
+
+		//echo json_encode($jm);
+		
+		$data['nilai'] = $jm;
+
 		$this->load->view('header', $data);
 		$this->load->view('nilaisiswa/rapor', $data);
 		$this->load->view('footer');
