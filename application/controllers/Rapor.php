@@ -44,6 +44,8 @@ class Rapor extends CI_Controller {
 	}
 
 	public function detail($id){
+		error_reporting(0);
+		
 		$get = explode("|",base64_decode($id));
 
 		$data['title'] = 'Nilai Siswa';
