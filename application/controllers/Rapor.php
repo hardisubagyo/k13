@@ -288,7 +288,7 @@ class Rapor extends CI_Controller {
 				semester = '$get[2]'
 		")->row();
 
-		$idtingkat = $this->db->query("SELECT tm_kelas.id_tingkat FROM tm_siswa JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas WHERE tm_siswa.NISN = '$get[0]' ")->row();
+		$idtingkat = $this->db->query("SELECT tm_kelas.id_tingkat, tm_kelas.id_kelas FROM tm_siswa JOIN tm_kelas ON tm_kelas.id_kelas = tm_siswa.id_kelas WHERE tm_siswa.NISN = '$get[0]' ")->row();
 
 		$jm = array();
 		$matapelajaran = $this->db->query("
@@ -428,6 +428,18 @@ class Rapor extends CI_Controller {
 		$fisik = $this->M_model->read('tr_fisik',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
 		$prestasi = $this->M_model->read('tr_prestasi',array('NISN' => $get[0], 'id_tahunajaran' => $get[1], 'semester' => $get[2]))->row();
 		$sekolah = $this->M_model->read('tm_sekolah',array('id'=>'1'))->row();
+		$kepsek = $this->M_model->read('tm_pegawai',array('id_akses' => '3'))->row();
+
+		$walikelas = $this->db->query("
+			SELECT 
+				tm_pegawai.NIP,
+				tm_pegawai.nama_pegawai
+			FROM 
+				tr_walikelas 
+			JOIN tm_pegawai ON tm_pegawai.NIP = tr_walikelas.NIP
+			WHERE 
+				tr_walikelas.id_kelas = '$idtingkat->id_kelas'
+		")->row();
 
 		$mpdf = new \Mpdf\Mpdf(
 			['format' => 'Letter-P']);
@@ -445,6 +457,12 @@ class Rapor extends CI_Controller {
 			$deskripsi_sosial = $sosial->deskripsi; 
 		}else{
 			$deskripsi_sosial = "-";
+		}; 
+
+		if(!empty($siswa->nama_ayah)){
+			$ortu = $siswa->nama_ayah; 
+		}else{
+			$ortu = $siswa->nama_wali;
 		}; 
 		
 		$mpdf->WriteHTML('
@@ -587,7 +605,7 @@ class Rapor extends CI_Controller {
 			<table id="rekap">
 				<thead>
 					<tr>
-						<th><h5><b>D. Saran - saran</b></h5></th>
+						<th><h5><b>D. SARAN-SARAN</b></h5></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -600,12 +618,12 @@ class Rapor extends CI_Controller {
 			<table id="rekap">
 				<thead>
 					<tr>
-						<th colspan="4"><h5><b>E. Tinggi dan Berat Badan</b></h5></th>
+						<th colspan="4"><h5><b>E. TINGGI DAN BERAT BADAN</b></h5></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr align="center">
-						<td rowspan="2" width="5%">NO</td>
+						<td rowspan="2" width="5%">No</td>
 						<td rowspan="2" width="45%">Aspek yang dinilai</td>
 						<td colspan="2">Semester</td>
 					</tr>
@@ -631,7 +649,7 @@ class Rapor extends CI_Controller {
 			<table id="rekap">
 				<thead>
 					<tr>
-						<th colspan="4"><h5><b>F. Kondisi Kesehatan</b></h5></th>
+						<th colspan="4"><h5><b>F. KONDISI KESEHATAN</b></h5></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -661,7 +679,7 @@ class Rapor extends CI_Controller {
 			<table id="rekap">
 				<thead>
 					<tr>
-						<th><h5><b>G. Prestasi</b></h5></th>
+						<th><h5><b>G. PRESTASI</b></h5></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -674,26 +692,75 @@ class Rapor extends CI_Controller {
 			<table id="rekap">
 				<thead>
 					<tr>
-						<th colspan="4"><h5><b>H. Ketidakhadiran</b></h5></th>
+						<th colspan="4"><h5><b>H. KETIDAKHADIRAN</b></h5></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td width="5%">1</td>
 						<td width="25%">Sakit</td>
-						<td width="70%">'.$absen->sakit.' kg</td>
+						<td width="70%">'.$absen->sakit.'</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>Izin</td>
-						<td>'.$absen->ijin.' kg</td>
+						<td>'.$absen->ijin.'</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>Tanpa Keterangan</td>
-						<td>'.$absen->alpa.' kg</td>
+						<td>'.$absen->alpa.'</td>
 					</tr>
 				</tbody>
+			</table>
+		');
+
+		$mpdf->WriteHTML('
+			<table width="100%">
+				<tr>
+					<td width="65%">&nbsp;</td>
+					<td width="35%">
+						Keputusan<br>
+						Berdasarkan pencapaian<br>
+						seluruh kompetensi<br>
+						peserta didik dinyatakan :<br>
+						(Naik/Tinggal*) Kelas : (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br>
+						*) Coret yang tidak perlu
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<table width="100%">
+				<tr>
+					<td width="30%" align="center">
+						Orang Tua/Wali
+						<br><br><br><br><br>
+						'.$ortu.'
+					</td>
+					<td width="40%">
+
+					</td>
+					<td width="30%" align="center">
+						Guru Kelas
+						<br><br><br><br><br>
+						'.$walikelas->nama_pegawai.'<br>
+						NIP : '.$walikelas->NIP.'
+					</td>
+				</tr>
+
+				<tr>
+					<td width="30%" align="center"></td>
+					<td width="40%" align="center">
+						Mengetahui<br>
+						Kepala Sekolah
+						<br><br><br><br><br>
+						'.$kepsek->nama_pegawai.'<br>
+						NIP : '.$kepsek->NIP.'
+
+					</td>
+					<td width="30%" align="center"></td>
+				</tr>
 			</table>
 		');
 
