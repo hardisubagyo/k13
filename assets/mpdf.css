@@ -1,0 +1,26 @@
+body {
+    background-color: #e9f2ff;
+    font-size: 10pt;
+    font-family:charissil, serif;
+}
+#Rekap {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#Rekap td, #Rekap th {
+  padding: 8px;
+}
+
+#Rekap tr:nth-child(even){background-color: #f2f2f2;}
+
+#Rekap tr:hover {background-color: #ddd;}
+
+#Rekap th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: #94e4f9;
+  color: black;
+}

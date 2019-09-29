@@ -60,15 +60,15 @@
                                 <tr>
                                     <td width="15%">Nama Sekolah</td>
                                     <td width="5%">:</td>
-                                    <td width="30%">Nama Sekolah</td>
+                                    <td width="30%"><?php echo $sekolah->nama; ?></td>
                                     <td width="15%">Tahun Pelajaran</td>
                                     <td width="5%">:</td>
                                     <td width="30%"><?php echo $tahunajaran->tahunajaran; ?></td>
                                 </tr>
                                 <tr>
-                                    <td width="15%">Nama Sekolah</td>
+                                    <td width="15%">Alamat Sekolah</td>
                                     <td width="5%">:</td>
-                                    <td colspan="4" width="30%">Alamat Sekolah</td>
+                                    <td colspan="4" width="30%"><?php echo $sekolah->alamat; ?></td>
                                 </tr>
 		                    </tbody>
                         </table>

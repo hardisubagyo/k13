@@ -166,7 +166,7 @@
 									if(($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
 								?>
 									<div class="col-12 col-sm-4">
-										<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+										<a href="<?php echo site_url('Sekolah'); ?>" class="d-block text-default text-center ripple-dark rounded p-3">
 											<i class="icon-home7 icon-2x"></i>
 											<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Data Sekolah</div>
 										</a>
