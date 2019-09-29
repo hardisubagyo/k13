@@ -45,7 +45,7 @@ class Rapor extends CI_Controller {
 
 	public function detail($id){
 		error_reporting(0);
-		
+
 		$get = explode("|",base64_decode($id));
 
 		$data['title'] = 'Nilai Siswa';
@@ -245,6 +245,8 @@ class Rapor extends CI_Controller {
 	}
 
 	public function cetak($id){
+		error_reporting(0);
+		
 		$get = explode("|",base64_decode($id));
 
 		$tahunajaran = $this->db->query("SELECT * FROM tm_tahunajaran WHERE id_tahunajaran = '$get[1]'")->row();
