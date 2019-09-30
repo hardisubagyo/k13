@@ -74,6 +74,8 @@
 								<th>Desk</th>
 								<th>Nilai Min</th>
 								<th>Desk</th>
+								<th>Nilai</th>
+								<th>Predikat</th>
 								<th>Keterangan</th>
 								<th>Aksi</th>
 							</tr>
@@ -117,9 +119,52 @@
 										</td>
 										<?php } ?>
 										<td><?php echo max($maks); ?></td>
-										<td></td>
+										<td>
+											<?php
+												if(max($maks) > 89){
+													echo "Sangat Baik";
+												}else if(max($maks) > 79){
+													echo "Baik";
+												}else if(max($maks) > 70){
+													echo "Cukup";
+												}else{
+													echo "Perlu Bimbingan";
+												}
+											?>
+										</td>
 										<td><?php echo min($maks); ?></td>
-										<td></td>
+										<td>
+											<?php
+												if(min($maks) > 89){
+													echo "Sangat Baik";
+												}else if(min($maks) > 79){
+													echo "Baik";
+												}else if(min($maks) > 70){
+													echo "Cukup";
+												}else{
+													echo "Perlu Bimbingan";
+												}
+											?>
+										</td>
+										<td>
+											<?php
+												$nilaitotal = round(array_sum($maks)/count($maks));
+												echo $nilaitotal;
+											?>
+										</td>
+										<td>
+											<?php
+												if($nilaitotal > 89){
+													echo "A";
+												}else if($nilaitotal > 79){
+													echo "B";
+												}else if($nilaitotal > 70){
+													echo "C";
+												}else{
+													echo "D	";
+												}
+											?>
+										</td>
 										<td>
 											<?php 
 												$getketerangan = $this->db->query("SELECT keterangan FROM tr_katerangan WHERE NISN = '".$siswa->NISN."' AND id_matpel = '".$matpel->id_matpel."' AND id_tahunajaran = '".$ta->id_tahunajaran."' AND semester = '".$this->input->get('semester')."' AND id_jenis_kd = '".$this->input->get('id_jenis_kd')."' ")->row();

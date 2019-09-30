@@ -135,15 +135,41 @@
                                 </tr>
                                 <?php 
                                     $no = 1;
-                                    foreach($nilai as $item){ ?>
+                                    foreach($nilai as $item){ 
+                                    
+                                ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $item['MataPelajaran']; ?></td>
-                                        <td><?php echo round($item['JenisKD'][0]['Nilai'], 2) ; ?></td>
-                                        <td><?php echo $item['JenisKD'][0]['Predikat']; ?></td>
+                                        <td><?php echo round($item['JenisKD'][0]['Nilai']) ; ?></td>
+                                        <td>
+                                            <?php 
+                                                if(round($item['JenisKD'][0]['Nilai']) > 89){
+													echo "A";
+												}else if(round($item['JenisKD'][0]['Nilai']) > 79){
+													echo "B";
+												}else if(round($item['JenisKD'][0]['Nilai']) > 70){
+													echo "C";
+												}else{
+													echo "D	";
+												}
+                                            ?>
+                                        </td>
                                         <td><?php echo $item['JenisKD'][0]['Deskripsi']; ?></td>
-                                        <td><?php echo round($item['JenisKD'][1]['Nilai'], 2); ?></td>
-                                        <td><?php echo $item['JenisKD'][1]['Predikat']; ?></td>
+                                        <td><?php echo round($item['JenisKD'][1]['Nilai']); ?></td>
+                                        <td>
+                                            <?php 
+                                                if(round($item['JenisKD'][1]['Nilai']) > 89){
+													echo "A";
+												}else if(round($item['JenisKD'][1]['Nilai']) > 79){
+													echo "B";
+												}else if(round($item['JenisKD'][1]['Nilai']) > 70){
+													echo "C";
+												}else{
+													echo "D	";
+												}
+                                            ?>
+                                        </td>
                                         <td><?php echo $item['JenisKD'][1]['Deskripsi']; ?></td>
                                     </tr>
                                 <?php } ?>
