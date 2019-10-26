@@ -20,7 +20,10 @@
 			<div class="card">
 				<div class="card-header bg-success text-white header-elements-inline">
 					<h6 class="card-title">
-						<?php echo $title. ' <b>' .$matpel->nama_matpel. '</b> Tahun Ajaran <b>' . $ta->tahunajaran .'</b> Semester <b>'. $this->input->get('semester') .'</b> Tingkat <b>'. $tingkat->tingkat .'</b> Kelas <b>'. $kelas.'</b>'; ?></h6>
+						<?php echo $title. ' <b>' .$matpel->nama_matpel. ' ' .$this->input->get('nilai'). '</b> Tahun Ajaran <b>' . $ta->tahunajaran .'</b> Semester <b>'. $this->input->get('semester') .'</b> Tingkat <b>'. $tingkat->tingkat .'</b> Kelas <b>'. $kelas.'</b>'; 
+						?>
+							
+						</h6>
 					<div class="header-elements">
 						<div class="list-icons">
 	                		<a class="list-icons-item" data-action="collapse"></a>
@@ -47,6 +50,7 @@
 								<input type="hidden" name="id_jenis_kd" value="<?php echo $id_jenis_kd; ?>">
 								<input type="hidden" name="semester" value="<?php echo $this->input->get('semester'); ?>">
 								<input type="hidden" name="id_kelas" value="<?php echo $this->input->get('id_kelas'); ?>">
+								<input type="hidden" name="jenis_nilai" value="<?php echo $this->input->get('nilai'); ?>">
 								<?php
 									$idkelas = $this->input->get('id_kelas');
 									$getSiswa = $this->db->query("
@@ -85,7 +89,7 @@
 						<hr>
 
 						<div class="col-md-12">
-							<table class="table table-responsive" width="100%">
+							<table class="table">
 								<tr class="bg-success">
 									<th>No Kompetensii Dasar</th>
 									<th>Keterangan</th>

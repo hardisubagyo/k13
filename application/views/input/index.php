@@ -63,6 +63,15 @@
 							</select>
 						</div>
 
+						<div class="form-group">
+							<label>Nilai</label>
+							<select class="form-control" name="nilai">
+								<option value="Harian">Harian</option>
+								<option value="UTS">UTS</option>
+								<option value="UAS">UAS</option>
+							</select>
+						</div>
+
 						<input type="hidden" name="id_matpel" value="<?php echo $this->uri->segment(3); ?>">
 					</div>
 
