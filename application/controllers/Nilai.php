@@ -63,6 +63,7 @@ class Nilai extends CI_Controller {
 		$idkd = $this->input->post('idkd');
 		$idtingkat = $this->input->post('idtingkat');
 		$idkelas = $this->input->post('idkelas');
+		$jenisnilai = $this->input->post('jenisnilai');
 
 		$query = $this->db->query("
 			SELECT 
@@ -71,7 +72,7 @@ class Nilai extends CI_Controller {
 			FROM 
 				tr_nilai_matpel
 			JOIN tm_kd ON tm_kd.id_kd = tr_nilai_matpel.id_kd
-			WHERE tr_nilai_matpel.NISN = '$nisn' AND tr_nilai_matpel.id_matpel = '$idmatpel' AND tr_nilai_matpel.id_tahunajaran = '$ta' AND tr_nilai_matpel.semester = '$semester' AND tr_nilai_matpel.id_jenis_kd = '$idjeniskd' AND tr_nilai_matpel.id_tingkat = '$idtingkat'
+			WHERE tr_nilai_matpel.NISN = '$nisn' AND tr_nilai_matpel.id_matpel = '$idmatpel' AND tr_nilai_matpel.id_tahunajaran = '$ta' AND tr_nilai_matpel.semester = '$semester' AND tr_nilai_matpel.id_jenis_kd = '$idjeniskd' AND tr_nilai_matpel.id_tingkat = '$idtingkat' AND tr_nilai_matpel.jenis_nilai = '$jenisnilai'
 		")->result();
 
 		$keterangan = $this->db->query("

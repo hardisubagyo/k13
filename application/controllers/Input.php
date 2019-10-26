@@ -81,7 +81,7 @@ class Input extends CI_Controller {
 				$nilai = $this->input->post(str_replace(array("."," ","'"), "", $siswa->NISN.'-'.$kd->no_kd));
 				$this->db->query("INSERT INTO tr_nilai_matpel (NISN,id_matpel,id_kd,nilai,id_tingkat,id_kelas,id_tahunajaran,semester,id_jenis_kd,jenis_nilai) VALUES('".$siswa->NISN."','".$id_matpel."','".$kd->id_kd."','".$nilai."','".$id_tingkat."','".$idkelas."','".$tahunajaran."','".$semester."','".$id_jenis_kd."','".$jenis_nilai."')");
 			}
-			$this->db->query("INSERT INTO tr_katerangan (NISN,id_matpel,id_tahunajaran,keterangan,semester,id_jenis_kd,jenis_nilai) VALUES('".$siswa->NISN."','".$id_matpel."','".$tahunajaran."','".$this->input->post(str_replace(array("."," ","'"), "", $siswa->NISN))."','".$semester."','".$id_jenis_kd."','".$jenis_nilai."')");
+			$this->db->query("INSERT INTO tr_katerangan (NISN,id_matpel,id_tahunajaran,keterangan,semester,id_jenis_kd) VALUES('".$siswa->NISN."','".$id_matpel."','".$tahunajaran."','".$this->input->post(str_replace(array("."," ","'"), "", $siswa->NISN))."','".$semester."','".$id_jenis_kd."')");
 		}
 
 		$this->session->set_flashdata('success', 'Berhasil diinput');

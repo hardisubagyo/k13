@@ -92,6 +92,15 @@
 								<option value="Genap">Genap</option>
 							</select>
 						</div>
+
+						<div class="form-group">
+							<label>Nilai</label>
+							<select class="form-control" name="nilai">
+								<option value="Harian">Harian</option>
+								<option value="UTS">UTS</option>
+								<option value="UAS">UAS</option>
+							</select>
+						</div>
 					</div>
 
 					<div class="card-footer">
