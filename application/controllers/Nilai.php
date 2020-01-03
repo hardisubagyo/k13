@@ -120,6 +120,7 @@ class Nilai extends CI_Controller {
 		$idkd = $this->input->post('idkd');
 		$idtingkat = $this->input->post('idtingkat');
 		$idkelas = $this->input->post('idkelas');
+		$jenisnilai = $this->input->post('jenisnilai');
 
 		$query = $this->db->query("
 			SELECT 
@@ -138,7 +139,7 @@ class Nilai extends CI_Controller {
 
 		$this->M_model->update('tr_katerangan',array('keterangan' => $this->input->post("keterangan")), array('id_keterangan' => $this->input->post("id_keterangan")));
 
-		redirect(site_url('Nilai/View?id_jenis_kd='.$idjeniskd.'&id_matpel='.$idmatpel.'&id_kelas='.$idkelas.'&id_tahunajaran='.$ta.'&semester='.$semester.''));
+		redirect(site_url('Nilai/View?id_jenis_kd='.$idjeniskd.'&id_matpel='.$idmatpel.'&id_kelas='.$idkelas.'&id_tahunajaran='.$ta.'&semester='.$semester.'&nilai='.$jenisnilai));
 	}
 
 	public function get_kelas($id){

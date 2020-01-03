@@ -563,22 +563,30 @@ class Rapor extends CI_Controller {
         foreach($nilai as $item){
 			if(round($item['JenisKD'][1]['Nilai']) > 89){
 				$predikatket = "A";
+				$deskripsi_nilai_1 = "Sangat Baik";
 			}else if(round($item['JenisKD'][1]['Nilai']) > 79){
 				$predikatket = "B";
+				$deskripsi_nilai_1 = "Baik";
 			}else if(round($item['JenisKD'][1]['Nilai']) > 70){
 				$predikatket = "C";
+				$deskripsi_nilai_1 = "Cukup";
 			}else{
 				$predikatket = "D	";
+				$deskripsi_nilai_1 = "Perlu Bimbingan";
 			}
 
 			if(round($item['JenisKD'][0]['Nilai']) > 89){
 				$predikatpeng = "A";
+				$deskripsi_nilai_0 = "Sangat Baik";
 			}else if(round($item['JenisKD'][0]['Nilai']) > 79){
 				$predikatpeng = "B";
+				$deskripsi_nilai_0 = "Baik";
 			}else if(round($item['JenisKD'][0]['Nilai']) > 70){
 				$predikatpeng = "C";
+				$deskripsi_nilai_0 = "Cukup";
 			}else{
 				$predikatpeng = "D	";
+				$deskripsi_nilai_0 = "Perlu Bimbingan";
 			}
 
 			$mpdf->WriteHTML('
@@ -587,10 +595,10 @@ class Rapor extends CI_Controller {
 					<td>'.$item["MataPelajaran"].'</td>
 					<td>'.round($item["JenisKD"][0]["Nilai"]).'</td>
 					<td>'.$predikatket.'</td>
-					<td>'.$item["JenisKD"][0]["Deskripsi"].'</td>
+					<td>'.$deskripsi_nilai_0.'</td>
 					<td>'.round($item["JenisKD"][1]["Nilai"]).'</td>
 					<td>'.$predikatpeng.'</td>
-					<td>'.$item["JenisKD"][1]["Deskripsi"].'</td>
+					<td>'.$deskripsi_nilai_1.'</td>
 				</tr>
 			');
 		}

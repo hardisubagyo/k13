@@ -155,7 +155,19 @@
 												}
                                             ?>
                                         </td>
-                                        <td><?php echo $item['JenisKD'][0]['Deskripsi']; ?></td>
+                                        <td>
+                                            <?php
+                                                if(round($item['JenisKD'][0]['Nilai']) > 89){
+                                                    echo "Sangat Baik";
+                                                }else if(round($item['JenisKD'][0]['Nilai']) > 79){
+                                                    echo "Baik";
+                                                }else if(round($item['JenisKD'][0]['Nilai']) > 70){
+                                                    echo "Cukup";
+                                                }else{
+                                                    echo "Perlu Bimbingan";
+                                                }
+                                            ?>
+                                        </td>
                                         <td><?php echo round($item['JenisKD'][1]['Nilai']); ?></td>
                                         <td>
                                             <?php 
@@ -170,7 +182,19 @@
 												}
                                             ?>
                                         </td>
-                                        <td><?php echo $item['JenisKD'][1]['Deskripsi']; ?></td>
+                                        <td>
+                                            <?php
+                                                if(round($item['JenisKD'][1]['Nilai']) > 89){
+                                                    echo "Sangat Baik";
+                                                }else if(round($item['JenisKD'][1]['Nilai']) > 79){
+                                                    echo "Baik";
+                                                }else if(round($item['JenisKD'][1]['Nilai']) > 70){
+                                                    echo "Cukup";
+                                                }else{
+                                                    echo "Perlu Bimbingan";
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

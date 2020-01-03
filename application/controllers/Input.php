@@ -45,6 +45,8 @@ class Input extends CI_Controller {
 
 		//echo json_encode($data);
 
+		
+
 		$this->load->view('header', $data);
 		$this->load->view('input/input', $data);
 		$this->load->view('footer');	
