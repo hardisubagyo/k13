@@ -128,6 +128,9 @@
 								<a href="<?php echo site_url('Matpel'); ?>" class="dropdown-item">
 									<i class="icon-primitive-square"></i> Master Mata Pelajaran
 								</a>
+								<a href="<?php echo site_url('DeskMatpel'); ?>" class="dropdown-item">
+									<i class="icon-primitive-square"></i> Master Deskripsi Mata Pelajaran
+								</a>
 								<a href="<?php echo site_url('Kd'); ?>" class="dropdown-item">
 									<i class="icon-primitive-square"></i> Master Kompetensi Dasar
 								</a>

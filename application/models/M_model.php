@@ -163,5 +163,22 @@ class M_model extends CI_Model {
 
 		return $this->db->get();
 	}
+
+	function deskmatpel($where = null){
+		$this->db->select('
+			tm_desk_matpel.*,
+			tm_matpel.*,
+			tm_tingkat.*
+		');
+		$this->db->from('tm_desk_matpel');
+		$this->db->join('tm_matpel','tm_matpel.id_matpel = tm_desk_matpel.id_matpel');
+		$this->db->join('tm_tingkat','tm_tingkat.id_tingkat = tm_desk_matpel.id_tingkat');
+
+		if($where != null){
+			$this->db->where($where);
+		}
+
+		return $this->db->get();
+	}
 	
 }

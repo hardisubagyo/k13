@@ -166,6 +166,8 @@
                                                 }else{
                                                     echo "Perlu Bimbingan";
                                                 }
+
+                                                echo " dalam ". $item['DeskPengetahuan'];
                                             ?>
                                         </td>
                                         <td><?php echo round($item['JenisKD'][1]['Nilai']); ?></td>
@@ -193,6 +195,8 @@
                                                 }else{
                                                     echo "Perlu Bimbingan";
                                                 }
+
+                                                echo " dalam ". $item['DeskKeterampilan'];
                                             ?>
                                         </td>
                                     </tr>

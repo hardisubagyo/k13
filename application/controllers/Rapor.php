@@ -99,12 +99,16 @@ class Rapor extends CI_Controller {
 		$jm = array();
 		$matapelajaran = $this->db->query("
 				SELECT 
-					DISTINCT m.nama_matpel, m.id_matpel
+					DISTINCT m.nama_matpel, m.id_matpel, d.desk_pengetahuan, d.desk_keterampilan
 				FROM 
 					tm_matpel as m
 				JOIN tm_kd as k ON k.id_matpel = m.id_matpel
+				LEFT JOIN tm_desk_matpel as d ON d.id_matpel = m.id_matpel
 				WHERE k.id_tingkat = '$idtingkat->id_tingkat'
 			")->result();
+
+		//echo json_encode($matapelajaran);
+
 		foreach($matapelajaran as $item){
 
 			$JenisKD = array();
@@ -154,7 +158,9 @@ class Rapor extends CI_Controller {
 			
 			array_push($jm, array(
 				"MataPelajaran" => $item->nama_matpel,
-				"JenisKD" => $JenisKD
+				"JenisKD" => $JenisKD,
+				"DeskPengetahuan" => $item->desk_pengetahuan,
+				"DeskKeterampilan" => $item->desk_keterampilan
 			));
 		}
 		$data['nilai'] = $jm;
@@ -297,10 +303,11 @@ class Rapor extends CI_Controller {
 		$jm = array();
 		$matapelajaran = $this->db->query("
 				SELECT 
-					DISTINCT m.nama_matpel, m.id_matpel
+					DISTINCT m.nama_matpel, m.id_matpel,  d.desk_pengetahuan, d.desk_keterampilan
 				FROM 
 					tm_matpel as m
 				JOIN tm_kd as k ON k.id_matpel = m.id_matpel
+				LEFT JOIN tm_desk_matpel as d ON d.id_matpel = m.id_matpel
 				WHERE k.id_tingkat = '$idtingkat->id_tingkat'
 			")->result();
 		foreach($matapelajaran as $item){
@@ -352,7 +359,9 @@ class Rapor extends CI_Controller {
 			
 			array_push($jm, array(
 				"MataPelajaran" => $item->nama_matpel,
-				"JenisKD" => $JenisKD
+				"JenisKD" => $JenisKD,
+				"DeskPengetahuan" => $item->desk_pengetahuan,
+				"DeskKeterampilan" => $item->desk_keterampilan
 			));
 		}
 		$nilai = $jm;
@@ -595,10 +604,10 @@ class Rapor extends CI_Controller {
 					<td>'.$item["MataPelajaran"].'</td>
 					<td>'.round($item["JenisKD"][0]["Nilai"]).'</td>
 					<td>'.$predikatket.'</td>
-					<td>'.$deskripsi_nilai_0.'</td>
+					<td>'.$deskripsi_nilai_0.' dalam '.$item["DeskPengetahuan"].'</td>
 					<td>'.round($item["JenisKD"][1]["Nilai"]).'</td>
 					<td>'.$predikatpeng.'</td>
-					<td>'.$deskripsi_nilai_1.'</td>
+					<td>'.$deskripsi_nilai_1.' dalam '.$item["DeskKeterampilan"].'</td>
 				</tr>
 			');
 		}
