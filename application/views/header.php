@@ -90,7 +90,29 @@
 				</li>
 
 				<?php
-					if(($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
+					if(($this->session->userdata('id_akses') == '1') || ($this->session->userdata('id_akses') == '2')){
+				?>
+					<li class="nav-item dropdown">
+						<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
+							<i class="icon-office mr-2"></i>
+							Data Master
+						</a>
+
+						<div class="dropdown-menu">
+							<div class="dropdown-header">Data Master</div>
+							<div class="row">
+								<div class="col-md-6">
+									<a href="<?php echo site_url('DeskMatpel'); ?>" class="dropdown-item">
+										<i class="icon-primitive-square"></i> Master Deskripsi Mata Pelajaran
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+				<?php }else{} ?>
+
+				<?php
+					if(($this->session->userdata('id_akses') == '4')){
 				?>
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
@@ -155,7 +177,8 @@
 				<?php 
 					}else{}
 				?>
-
+				
+				<?php if(($this->session->userdata('id_akses') != '3')){ ?>
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-city mr-2"></i>
@@ -166,7 +189,7 @@
 						<div class="dropdown-content-body p-1">
 							<div class="row no-gutters">
 								<?php
-									if(($this->session->userdata('id_akses') == '3') || ($this->session->userdata('id_akses') == '4')){
+									if(($this->session->userdata('id_akses') == '4')){
 								?>
 									<div class="col-12 col-sm-4">
 										<a href="<?php echo site_url('Sekolah'); ?>" class="d-block text-default text-center ripple-dark rounded p-3">
@@ -201,6 +224,7 @@
 						</div>
 					</div>
 				</li>
+				<?php }else{} ?>
 				
 				<?php
 					if($this->session->userdata('id_akses') == '2' || ($this->session->userdata('id_akses') == '1')){
