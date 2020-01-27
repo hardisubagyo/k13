@@ -318,7 +318,10 @@
 				<?php
 					}else{}
 				?>
-
+				
+				<?php
+					if(($this->session->userdata('id_akses') == '1')){}else{
+				?>
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
 						<i class="icon-graduation mr-2"></i>
@@ -340,6 +343,8 @@
 						</div>
 					</div>
 				</li>
+
+				<?php } ?>
 
 			</ul>
 
